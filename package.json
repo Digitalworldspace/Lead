@@ -1,0 +1,11 @@
+{
+  "name": "style-of-life-amazon-best-products",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}

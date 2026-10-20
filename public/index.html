@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life — Smart Shopping</title>
+<meta name="description" content="Find and compare products from Amazon with AI-style best-pick ranking.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#fff;color:#111}
+header{padding:28px 6vw;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:24px;font-weight:800;letter-spacing:.4px}.sub{font-size:12px;color:#777}
+main{max-width:1180px;margin:auto;padding:55px 22px}.hero{text-align:center;max-width:850px;margin:0 auto 45px}
+h1{font-size:clamp(38px,6vw,70px);line-height:1.02;margin:0 0 18px;letter-spacing:-2px}
+.hero p{font-size:18px;color:#666;margin:0 0 28px}
+.search{display:flex;gap:10px;max-width:820px;margin:auto}.search input{flex:1;padding:18px 20px;border:1px solid #ddd;border-radius:14px;font-size:16px;outline:none}.search input:focus{border-color:#111}.search button{padding:0 26px;border:0;border-radius:14px;background:#111;color:#fff;font-weight:700;cursor:pointer}
+.status{text-align:center;color:#666;margin:25px 0;min-height:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:20px}
+.card{border:1px solid #e9e9e9;border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-height:430px;box-shadow:0 5px 25px rgba(0,0,0,.04)}
+.pic{height:250px;background:#f7f7f7;display:flex;align-items:center;justify-content:center}.pic img{width:100%;height:100%;object-fit:contain}
+.body{padding:18px;display:flex;flex-direction:column;flex:1}.badge{font-size:12px;font-weight:800;margin-bottom:9px}.title{font-size:15px;line-height:1.4;font-weight:650}.meta{margin-top:12px;color:#666;font-size:13px}.price{font-size:22px;font-weight:800;margin-top:8px}.buy{margin-top:auto;padding:12px 15px;background:#111;color:#fff;text-decoration:none;border-radius:11px;text-align:center;font-weight:700}
+.note{text-align:center;color:#777;font-size:12px;margin-top:32px}
+@media(max-width:600px){header{padding:20px}.search{flex-direction:column}.search button{height:52px}.pic{height:220px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">Style Of Life</div><div class="sub">Smart Shopping</div></div></header>
+<main>
+<section class="hero">
+<h1>Find the best product.<br>Not just a product.</h1>
+<p>Tell us what you want. We search Amazon and rank the strongest matches by relevance, rating, reviews and value.</p>
+<form class="search" id="form">
+<input id="q" autocomplete="off" placeholder="e.g. best moissanite bracelet under $500 for anniversary" required>
+<button>Search</button>
+</form>
+</section>
+<div class="status" id="status"></div>
+<section class="grid" id="grid"></section>
+<div class="note">Prices, availability and product details are supplied by Amazon. We may earn a commission from qualifying purchases.</div>
+</main>
+<script>
+const form=document.getElementById("form"), q=document.getElementById("q"), grid=document.getElementById("grid"), status=document.getElementById("status");
+form.addEventListener("submit", async e=>{
+ e.preventDefault(); const query=q.value.trim(); if(!query)return;
+ status.textContent="Finding the best matches…"; grid.innerHTML="";
+ try{
+   const r=await fetch("/api/search?q="+encodeURIComponent(query));
+   const data=await r.json();
+   if(!r.ok) throw new Error(data.error||"Search failed");
+   if(!data.products?.length){status.textContent="No matching products found. Try a broader search.";return}
+   status.textContent=`Top ${data.products.length} matches`;
+   grid.innerHTML=data.products.map(p=>`
+     <article class="card">
+       <div class="pic">${p.image?`<img src="${p.image}" alt="">`:""}</div>
+       <div class="body">
+         <div class="badge">${escapeHtml(p.badge)}</div>
+         <div class="title">${escapeHtml(p.title)}</div>
+         <div class="meta">${p.rating?`★ ${p.rating.toFixed(1)}`:""} ${p.reviews?` · ${p.reviews.toLocaleString()} reviews`:""}</div>
+         <div class="price">${p.price!=null?"$"+p.price.toFixed(2):"See Amazon price"}</div>
+         <a class="buy" href="${p.url}" target="_blank" rel="sponsored nofollow noopener">View on Amazon</a>
+       </div>
+     </article>`).join("");
+ }catch(err){status.textContent=err.message||"Something went wrong."}
+});
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+</script>
+</body>
+</html>
