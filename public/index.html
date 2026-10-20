@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life — AI Shopping</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--text:#171717;--muted:#6d6d6d;--line:#e8e8e3;--accent:#111}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 35px}
+.logo{font-weight:800;letter-spacing:.08em}.badge{font-size:12px;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:999px}
+.hero{text-align:center;padding:35px 0 28px}.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.02;margin:0 0 16px;letter-spacing:-.045em}
+.hero p{max-width:700px;margin:auto;color:var(--muted);font-size:17px}
+.search{max-width:850px;margin:28px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:9px;display:flex;gap:8px;box-shadow:0 12px 40px #00000008}
+.search input{flex:1;border:0;outline:0;padding:15px;font-size:16px;background:transparent}
+button{border:0;border-radius:15px;padding:13px 18px;background:#111;color:#fff;font-weight:700;cursor:pointer}
+button.secondary{background:#fff;color:#111;border:1px solid var(--line)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.status{color:var(--muted);font-size:14px;text-align:center;min-height:20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.pic{height:230px;background:#eee;display:flex;align-items:center;justify-content:center;color:#999;font-size:13px}
+.pic img{width:100%;height:100%;object-fit:cover}
+.body{padding:17px}.merchant{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.title{font-weight:750;font-size:17px;margin:7px 0}.desc{color:var(--muted);font-size:13px;line-height:1.5;min-height:40px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:15px}.price{font-weight:800;font-size:18px}
+.score{font-size:12px;background:#f0f0ec;border-radius:999px;padding:7px 9px}
+.actions{display:flex;gap:8px;margin-top:14px}.actions button{flex:1}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);border:1px dashed #d9d9d2;border-radius:22px}
+.why{margin-top:45px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:25px}
+.why h2{margin-top:0}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#f4f4f0;padding:9px 12px;border-radius:999px;font-size:13px}
+footer{color:#888;font-size:12px;text-align:center;margin-top:35px}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid{grid-template-columns:1fr}.search{flex-direction:column}.search button{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">STYLE OF LIFE</div><div class="badge">AI SHOPPING MVP</div></header>
+<section class="hero">
+<h1>Shop smarter.<br>Choose better.</h1>
+<p>Tell us what you want. The assistant finds matching products, compares value, and explains which options fit your needs.</p>
+<div class="search">
+<input id="q" placeholder="e.g. luxury moissanite bracelet under $500">
+<button onclick="searchProducts()">Find products</button>
+</div>
+<div class="controls">
+<button class="secondary" onclick="demo('moissanite bracelet under $500')">Jewelry</button>
+<button class="secondary" onclick="demo('minimal gold necklace under $300')">Necklaces</button>
+<button class="secondary" onclick="demo('gift for wife under $250')">Gifts</button>
+</div>
+<div class="status" id="status"></div>
+</section>
+<section id="results" class="grid">
+<div class="empty">Start with a shopping request above.</div>
+</section>
+<section class="why">
+<h2>How this MVP works</h2>
+<div class="chips">
+<div class="chip">Need matching</div><div class="chip">Budget detection</div><div class="chip">Product scoring</div><div class="chip">Value comparison</div><div class="chip">Explainable recommendations</div><div class="chip">Merchant links</div>
+</div>
+</section>
+<footer>Free MVP • Replace demo catalog with live product APIs/affiliate feeds in the next phase.</footer>
+</div>
+<script>
+const catalog=[
+ {merchant:"Style Of Life",title:"Lab-Grown Diamond Tennis Bracelet",price:449,score:96,tags:["luxury","diamond","bracelet"],desc:"Elegant everyday luxury with a clean, giftable look.",img:"https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=80",url:"https://styleoflifein.etsy.com"},
+ {merchant:"Style Of Life",title:"Moissanite Tennis Bracelet",price:289,score:94,tags:["moissanite","bracelet","gift"],desc:"Sparkle-focused bracelet for a luxury look at a lower budget.",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80",url:"https://styleoflifein.etsy.com"},
+ {merchant:"Style Of Life",title:"Dainty Initial Pendant Necklace",price:179,score:91,tags:["necklace","initial","gift"],desc:"Personal, lightweight pendant designed for daily wear.",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",url:"https://styleoflifein.etsy.com"},
+ {merchant:"Demo Merchant",title:"Classic Gold Chain Necklace",price:249,score:88,tags:["gold","necklace","minimal"],desc:"Simple layering piece with a timeless silhouette.",img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80",url:"https://www.etsy.com"},
+ {merchant:"Demo Merchant",title:"Gift-Ready Statement Earrings",price:129,score:86,tags:["earrings","gift","statement"],desc:"Conversational statement style for dinners and occasions.",img:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=80",url:"https://www.etsy.com"},
+ {merchant:"Demo Merchant",title:"Minimal Cuff Bracelet",price:99,score:84,tags:["cuff","bracelet","minimal"],desc:"Clean everyday styling with an easy-to-wear profile.",img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80",url:"https://www.etsy.com"}
+];
+
+function parseBudget(q){
+ const m=q.match(/(?:under|below|less than|up to)\s*\$?\s*([\d,]+)/i);
+ return m?Number(m[1].replace(/,/g,'')):Infinity;
+}
+function terms(q){return q.toLowerCase().replace(/[^a-z0-9$ ]/g,' ').split(/\s+/).filter(x=>x.length>2)}
+function score(p,q){
+ const ts=terms(q), text=(p.title+" "+p.desc+" "+p.tags.join(" ")).toLowerCase();
+ let s=p.score;
+ ts.forEach(t=>{if(text.includes(t))s+=10});
+ const b=parseBudget(q); if(p.price<=b)s+=15; else if(b<Infinity)s-=25;
+ if(/gift|wife|husband|birthday|anniversary/i.test(q)&&p.tags.includes("gift"))s+=10;
+ if(/luxury|premium/i.test(q)&&p.tags.some(x=>["luxury","diamond","moissanite"].includes(x)))s+=8;
+ return Math.max(0,Math.min(99,s));
+}
+function render(items,q){
+ const el=document.getElementById("results");
+ if(!items.length){el.innerHTML='<div class="empty">No strong matches. Try a broader request or a higher budget.</div>';return}
+ el.innerHTML=items.map(p=>`<article class="card">
+ <div class="pic"><img src="${p.img}" alt="${p.title}"></div>
+ <div class="body"><div class="merchant">${p.merchant}</div><div class="title">${p.title}</div><div class="desc">${p.desc}</div>
+ <div class="row"><div class="price">$${p.price}</div><div class="score">Match ${score(p,q)}/99</div></div>
+ <div class="actions"><button onclick="window.open('${p.url}','_blank')">View product</button><button class="secondary" onclick="explain('${p.title}',${score(p,q)},${p.price})">Why?</button></div>
+ </div></article>`).join("");
+}
+function searchProducts(){
+ const q=document.getElementById("q").value.trim();
+ if(!q)return;
+ document.getElementById("status").textContent="Analyzing your request…";
+ setTimeout(()=>{
+   const items=catalog.map(p=>({p,s:score(p,q)})).filter(x=>x.s>=45).sort((a,b)=>b.s-a.s).map(x=>x.p);
+   render(items,q);document.getElementById("status").textContent=`Found ${items.length} matching options.`;
+ },350);
+}
+function demo(x){document.getElementById("q").value=x;searchProducts()}
+function explain(title,s,p){
+ alert(`${title}\\n\\nAI-style match score: ${s}/99\\nPrice: $${p}\\n\\nScore is based on the request, budget, product attributes and demo catalog signals. Live review/price data will be connected in the next phase.`);
+}
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")searchProducts()});
+</script>
+</body>
+</html>
