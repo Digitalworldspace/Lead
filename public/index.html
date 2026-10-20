@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life | Smart Shopping</title>
+<meta name="description" content="Compare jewelry and gift ideas by budget, style and shopping intent.">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f7f4;color:#151515;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1160px;margin:auto;padding:22px 18px 70px}header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 34px}.logo{font-weight:900;letter-spacing:.1em}.tag{font-size:12px;border:1px solid #ddd;background:white;padding:8px 12px;border-radius:999px}
+.hero{text-align:center;padding:32px 0 28px}.hero h1{font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-.055em;margin:0 0 18px}.hero p{max-width:680px;margin:auto;color:#666;font-size:17px;line-height:1.5}
+.search{display:flex;gap:8px;max-width:880px;margin:28px auto 12px;background:#fff;border:1px solid #ddd;padding:9px;border-radius:22px;box-shadow:0 18px 60px #0000000b}.search input{flex:1;border:0;outline:0;padding:15px;font-size:16px}.search button{background:#111;color:#fff;border:0;border-radius:15px;padding:0 23px;font-weight:800}
+.quick{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.quick button,.filter{background:#fff;border:1px solid #ddd;border-radius:999px;padding:9px 13px;cursor:pointer}.status{text-align:center;color:#777;font-size:13px;min-height:25px;margin-top:10px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:25px;gap:10px}.toolbar h2{margin:0}.select{padding:9px;border:1px solid #ddd;border-radius:10px;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.card{background:#fff;border:1px solid #e2e2dc;border-radius:22px;overflow:hidden}.img{height:235px;background:#eee}.img img{width:100%;height:100%;object-fit:cover}.body{padding:17px}.merchant{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#777}.title{font-size:18px;font-weight:800;margin:7px 0}.desc{font-size:13px;color:#666;line-height:1.45;min-height:38px}.row{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.price{font-size:19px;font-weight:900}.match{font-size:12px;background:#f0f0eb;padding:7px 9px;border-radius:99px}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.chip{font-size:11px;background:#f5f5f1;padding:6px 8px;border-radius:8px}.actions{display:flex;gap:8px;margin-top:14px}.actions button{flex:1;padding:11px;border-radius:13px;border:1px solid #ddd;font-weight:800;cursor:pointer}.buy{background:#111!important;color:#fff;border-color:#111!important}.box{background:#fff;border:1px solid #e2e2dc;border-radius:22px;padding:22px;margin-top:38px}.box h2{margin-top:0}.box p{color:#666;line-height:1.55}.empty{text-align:center;grid-column:1/-1;padding:55px;border:1px dashed #ccc;border-radius:20px;color:#777}.disclosure{font-size:12px;color:#777;text-align:center;margin-top:35px;line-height:1.5}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:580px){.grid{grid-template-columns:1fr}.search{flex-direction:column}.search button{height:48px}.toolbar{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body><div class="wrap">
+<header><div class="logo">STYLE OF LIFE</div><div class="tag">SMART SHOPPING</div></header>
+<section class="hero">
+<h1>Find what fits<br>you best.</h1>
+<p>Describe what you want. Compare options by budget, product fit and shopping advantages — then visit the store.</p>
+<div class="search"><input id="q" placeholder="Best moissanite bracelet under $500 for anniversary"><button onclick="runSearch()">Find my best options</button></div>
+<div class="quick">
+<button onclick="demo('best moissanite bracelet under $500')">Moissanite under $500</button>
+<button onclick="demo('anniversary gift for wife under $250')">Anniversary gift</button>
+<button onclick="demo('minimal gold necklace under $300')">Gold necklace</button>
+<button onclick="demo('best jewelry gift under $100')">Under $100</button>
+</div><div id="status" class="status"></div>
+</section>
+<div class="toolbar"><h2 id="heading">Recommended for you</h2><select id="sort" class="select" onchange="runSearch()"><option value="match">Best match</option><option value="price">Lowest price</option><option value="rating">Highest rating</option></select></div>
+<section id="results" class="grid"><div class="empty">Enter a request to start shopping.</div></section>
+<section class="box"><h2>Why these recommendations?</h2><p>The site converts your request into shopping signals such as budget, product type, gifting intent and preferred style, then ranks available candidates. The live version can connect approved Amazon/product feeds without exposing API secrets in the browser.</p><div class="chips"><span class="chip">Budget fit</span><span class="chip">Product fit</span><span class="chip">Rating</span><span class="chip">Review volume</span><span class="chip">Value</span><span class="chip">Gift intent</span></div></section>
+<div class="disclosure">As an Amazon Associate, Style Of Life may earn from qualifying purchases. Current demo results are sample data until live Amazon/approved product data is connected.</div>
+</div>
+<script>
+const AMAZON_TAG="styleoflife08-21";
+const products=[
+{m:"Amazon",t:"Sterling Silver Tennis Bracelet",p:79,r:4.6,n:2100,tags:["bracelet","silver","value"],d:"Budget-friendly option with strong review volume.",url:"https://www.amazon.com/s?k=sterling+silver+tennis+bracelet",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"Moissanite Tennis Bracelet",p:299,r:4.7,n:820,tags:["moissanite","bracelet","gift","luxury"],d:"Sparkle-focused choice for a luxury look at a lower budget.",url:"https://www.amazon.com/s?k=moissanite+tennis+bracelet",img:"https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"14K Gold Initial Necklace",p:189,r:4.6,n:940,tags:["necklace","gold","initial","gift"],d:"Personalized-style gift with an everyday silhouette.",url:"https://www.amazon.com/s?k=14k+gold+initial+necklace",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"Lab-Grown Diamond Bracelet",p:499,r:4.8,n:310,tags:["diamond","bracelet","luxury"],d:"Premium option for shoppers prioritizing diamond style.",url:"https://www.amazon.com/s?k=lab+grown+diamond+bracelet",img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"Statement Drop Earrings",p:69,r:4.5,n:1600,tags:["earrings","gift","statement"],d:"Giftable statement style at an accessible price.",url:"https://www.amazon.com/s?k=statement+drop+earrings",img:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"Minimal Gold Chain Necklace",p:119,r:4.4,n:1200,tags:["necklace","gold","minimal"],d:"Simple everyday layering piece with strong value.",url:"https://www.amazon.com/s?k=minimal+gold+chain+necklace",img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80"}
+];
+function budget(q){let m=q.match(/(?:under|below|less than|up to)\s*\$?\s*([\d,]+)/i);return m?+m[1].replace(/,/g,""):Infinity}
+function calc(x,q){q=q.toLowerCase();let s=50,b=budget(q),text=(x.t+" "+x.d+" "+x.tags.join(" ")).toLowerCase();
+q.split(/\s+/).filter(w=>w.length>2).forEach(w=>{if(text.includes(w))s+=7});
+if(x.p<=b)s+=18;else if(b<Infinity)s-=28;
+s+=Math.min(14,x.r*2)+Math.min(12,Math.log10(x.n+1)*5);
+if(/gift|wife|husband|anniversary|birthday/.test(q)&&x.tags.includes("gift"))s+=10;
+if(/luxury|premium/.test(q)&&x.tags.includes("luxury"))s+=8;
+return Math.max(1,Math.min(99,Math.round(s)))}
+function render(list,q){const el=document.getElementById("results");if(!list.length){el.innerHTML='<div class="empty">No strong matches. Try a broader request or a higher budget.</div>';return}
+el.innerHTML=list.map((x,i)=>{const s=calc(x,q);return `<article class="card"><div class="img"><img src="${x.img}" alt="${x.t}"></div><div class="body"><div class="merchant">${i<3?"Recommended • ":""}${x.m}</div><div class="title">${x.t}</div><div class="desc">${x.d}</div><div class="row"><div class="price">$${x.p}</div><div class="match">Match ${s}/99</div></div><div class="chips"><span class="chip">★ ${x.r}</span><span class="chip">${x.n.toLocaleString()} reviews*</span></div><div class="actions"><button class="buy" onclick="openAffiliate('${encodeURIComponent(x.url)}')">View on Amazon</button><button onclick="why('${x.t}',${s})">Why?</button></div></div></article>`}).join("")}
+function openAffiliate(encoded){let u=decodeURIComponent(encoded);let sep=u.includes("?")?"&":"?";window.open(u+sep+"tag="+encodeURIComponent(AMAZON_TAG),"_blank")}
+function why(t,s){alert(t+"\\n\\nMatch score: "+s+"/99\\n\\nThe demo score combines your request, budget, product attributes, rating and review-volume signals. Live API data will replace sample data after Amazon approval/API access.")}
+function runSearch(){let q=document.getElementById("q").value.trim();if(!q)return;document.getElementById("status").textContent="Finding and ranking options…";setTimeout(()=>{let list=products.map(x=>({x,s:calc(x,q)})).filter(a=>a.s>=42);let mode=document.getElementById("sort").value;if(mode==="price")list.sort((a,b)=>a.x.p-b.x.p);else if(mode==="rating")list.sort((a,b)=>b.x.r-a.x.r);else list.sort((a,b)=>b.s-a.s);list=list.map(a=>a.x);render(list,q);document.getElementById("status").textContent=list.length+" options ranked for your request.";document.getElementById("heading").textContent="Best matches";},300)}
+function demo(q){document.getElementById("q").value=q;runSearch()}
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")runSearch()});
+window.addEventListener("load",()=>{document.getElementById("q").focus();});
+</script></body></html>
