@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life — Live AI Shopping</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f7f5;color:#111}
+.wrap{max-width:1180px;margin:auto;padding:28px 20px 70px}
+.hero{text-align:center;padding:35px 0 25px}.brand{font-size:14px;letter-spacing:3px;text-transform:uppercase}.hero h1{font-size:42px;margin:14px 0 10px}.hero p{color:#666;max-width:720px;margin:auto;line-height:1.6}
+.search{margin:30px auto 12px;background:white;border:1px solid #ddd;border-radius:18px;padding:8px;display:flex;max-width:900px;box-shadow:0 10px 35px #00000008}
+input{flex:1;border:0;outline:0;font-size:17px;padding:16px;border-radius:12px}
+button{border:0;border-radius:12px;background:#111;color:white;font-weight:700;padding:0 22px;cursor:pointer}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.chip{background:white;color:#111;border:1px solid #ddd;padding:9px 13px;border-radius:99px;cursor:pointer}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:38px 0 14px}.status{font-size:13px;color:#666}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e3e3e3;border-radius:18px;overflow:hidden}.pic{height:250px;background:#f0f0ee;display:flex;align-items:center;justify-content:center}.pic img{width:100%;height:100%;object-fit:contain}.body{padding:16px}.title{font-weight:700;line-height:1.35;min-height:64px}.meta{color:#666;font-size:13px;margin:9px 0}.price{font-size:22px;font-weight:800;margin:10px 0}.open{display:block;text-align:center;text-decoration:none;background:#111;color:#fff;padding:12px;border-radius:10px;font-weight:700}.empty{padding:60px;text-align:center;color:#777;border:1px dashed #ccc;border-radius:18px;background:#fff}
+.note{margin-top:30px;padding:18px;background:#fff;border:1px solid #ddd;border-radius:16px;color:#666;line-height:1.6;font-size:13px}
+.error{color:#a00;background:#fff0f0;border:1px solid #f0cccc;padding:14px;border-radius:12px}
+@media(max-width:650px){.hero h1{font-size:32px}.search{flex-direction:column}.search button{height:52px;margin-top:6px}.pic{height:220px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="brand">Style Of Life</div>
+    <h1>Shop anything. Search live.</h1>
+    <p>Describe what you want. This version does not use a hard-coded product catalog. Your request is sent to Amazon's live Creators API and matching Amazon items are returned.</p>
+  </div>
+
+  <div class="search">
+    <input id="q" placeholder="Try: best laptop under $800 for college" autocomplete="off">
+    <button id="go">Search Amazon</button>
+  </div>
+
+  <div class="chips">
+    <button class="chip" data-q="Moissanite bracelet under $500">Moissanite under $500</button>
+    <button class="chip" data-q="Best laptop under $800">Laptop under $800</button>
+    <button class="chip" data-q="Anniversary gift under $100">Anniversary gift</button>
+    <button class="chip" data-q="Running shoes for women">Running shoes</button>
+  </div>
+
+  <div class="bar">
+    <h2 id="heading">Live Amazon results</h2>
+    <div class="status" id="status">No search yet</div>
+  </div>
+
+  <div id="results" class="grid">
+    <div class="empty">Enter anything you want to shop for.</div>
+  </div>
+
+  <div class="note">
+    <b>Important:</b> This site uses Amazon's official Creators API. It does not contain a fake/static product catalog.
+    Live API credentials must stay on the server, never in GitHub frontend code. Amazon product availability, prices and other details can change.
+    Affiliate disclosure: Style Of Life may earn a commission from qualifying purchases.
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function money(v,currency="USD"){
+  if(typeof v !== "number") return "See Amazon";
+  return new Intl.NumberFormat("en-US",{style:"currency",currency}).format(v);
+}
+
+function card(p){
+  const img = p.image ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy">`
+                      : `<span>No image</span>`;
+  return `<article class="card">
+    <div class="pic">${img}</div>
+    <div class="body">
+      <div class="title">${escapeHtml(p.title)}</div>
+      <div class="meta">${p.rating ? `★ ${escapeHtml(String(p.rating))}` : "Rating shown by Amazon"}${p.reviewCount ? ` · ${Number(p.reviewCount).toLocaleString()} reviews` : ""}</div>
+      <div class="price">${money(p.price,p.currency)}</div>
+      <a class="open" href="${escapeHtml(p.url)}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+    </div>
+  </article>`;
+}
+
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+async function run(){
+  const q = $("q").value.trim();
+  if(!q) return;
+  $("status").textContent = "Searching Amazon live…";
+  $("results").innerHTML = `<div class="empty">Finding live Amazon products…</div>`;
+  try{
+    const r = await fetch("/api/search?q="+encodeURIComponent(q));
+    const data = await r.json();
+    if(!r.ok) throw new Error(data.error || "Search failed");
+    $("heading").textContent = `Results for “${q}”`;
+    $("status").textContent = `${data.products.length} live Amazon result(s)`;
+    $("results").innerHTML = data.products.length
+      ? data.products.map(card).join("")
+      : `<div class="empty">Amazon returned no matching products for this request.</div>`;
+  }catch(e){
+    $("status").textContent = "Search error";
+    $("results").innerHTML = `<div class="error">${escapeHtml(e.message)}</div>`;
+  }
+}
+
+$("go").addEventListener("click",run);
+$("q").addEventListener("keydown",e=>{if(e.key==="Enter")run()});
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{$("q").value=b.dataset.q;run()}));
+</script>
+</body>
+</html>
