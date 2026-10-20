@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life — AI Shopping</title>
+<style>
+:root{--bg:#f7f7f4;--card:#fff;--text:#171717;--muted:#6b6b67;--line:#e7e7e1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial}.wrap{max-width:1200px;margin:auto;padding:25px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center;padding:5px 0 30px}.logo{font-weight:900;letter-spacing:.09em}.pill{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:99px;font-size:12px}
+.hero{text-align:center;padding:25px 0 25px}.hero h1{font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.05em;margin:0 0 16px}.hero p{max-width:720px;margin:auto;color:var(--muted);font-size:17px}
+.search{display:flex;gap:8px;max-width:900px;margin:28px auto 10px;background:#fff;border:1px solid var(--line);padding:9px;border-radius:22px;box-shadow:0 15px 50px #0000000a}.search input{flex:1;border:0;outline:0;padding:15px;font-size:16px}.search button{background:#111;color:#fff;border:0;border-radius:15px;padding:0 22px;font-weight:800}
+.status{text-align:center;color:var(--muted);font-size:13px;min-height:22px}.filters{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px}.filters button{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:99px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}.pic{height:230px;background:#eee}.pic img{width:100%;height:100%;object-fit:cover}.body{padding:17px}.merchant{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.08em}.title{font-weight:800;font-size:17px;margin:7px 0}.desc{color:#6b6b67;font-size:13px;line-height:1.45;min-height:38px}.row{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.price{font-weight:900;font-size:19px}.score{background:#f0f0eb;padding:7px 9px;border-radius:99px;font-size:12px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.tag{font-size:11px;background:#f6f6f2;padding:6px 8px;border-radius:8px}.actions{display:flex;gap:8px;margin-top:14px}.actions button{flex:1;border:0;border-radius:13px;padding:11px;font-weight:750;cursor:pointer}.buy{background:#111;color:#fff}.why{background:#fff;border:1px solid var(--line);border-radius:24px;margin-top:40px;padding:25px}.why h2{margin-top:0}.empty{text-align:center;grid-column:1/-1;padding:60px;border:1px dashed #d5d5ce;border-radius:22px;color:#777}.note{font-size:12px;color:#888;text-align:center;margin-top:28px;line-height:1.5}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:580px){.grid{grid-template-columns:1fr}.search{flex-direction:column}.search button{height:48px}.hero h1{font-size:46px}}
+</style></head><body><div class="wrap">
+<header><div class="logo">STYLE OF LIFE</div><div class="pill">MULTI-STORE AI SHOPPING</div></header>
+<section class="hero"><h1>Search the market.<br>Choose with confidence.</h1>
+<p>One conversational search. Compare products from connected merchant feeds and APIs, then rank them by the advantages that matter to you.</p>
+<div class="search"><input id="q" placeholder="Try: best moissanite bracelet under $500 for anniversary"><button onclick="search()">Search</button></div>
+<div class="filters"><button onclick="demo('best moissanite bracelet under $500 for anniversary')">Moissanite</button><button onclick="demo('luxury necklace under $300')">Necklace</button><button onclick="demo('gift for wife under $250')">Gift</button><button onclick="demo('best product under $100')">Under $100</button></div>
+<div id="status" class="status"></div></section>
+<section id="results" class="grid"><div class="empty">Your multi-store results will appear here.</div></section>
+<section class="why"><h2>How the real version will rank products</h2><p>We will retrieve products from approved APIs/affiliate feeds, normalize them, remove duplicates, and calculate a transparent recommendation score.</p><div class="meta"><span class="tag">Price & value</span><span class="tag">Reviews</span><span class="tag">Availability</span><span class="tag">Shipping</span><span class="tag">Returns</span><span class="tag">Features</span><span class="tag">Merchant trust</span><span class="tag">Customer intent</span></div></section>
+<div class="note">MVP demo data is shown until API credentials are connected. Do not publish prices/availability as live data until a live product feed is connected.</div>
+</div>
+<script>
+const products=[
+{m:"Style Of Life",t:"Moissanite Tennis Bracelet",p:289,r:4.9,n:420,tags:["moissanite","bracelet","gift","luxury"],d:"High sparkle, giftable design and a lower price point.",u:"https://styleoflifein.etsy.com",i:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80"},
+{m:"Amazon",t:"Sterling Silver Tennis Bracelet",p:79,r:4.6,n:2100,tags:["bracelet","silver","value"],d:"Budget-friendly option with strong review volume.",u:"https://www.amazon.com/",i:"https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=80"},
+{m:"Etsy",t:"Lab-Grown Diamond Bracelet",p:449,r:4.8,n:180,tags:["diamond","bracelet","luxury"],d:"Premium choice for shoppers prioritizing diamond style.",u:"https://www.etsy.com/",i:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80"},
+{m:"Nordstrom",t:"Minimal Gold Chain Necklace",p:198,r:4.7,n:870,tags:["necklace","gold","minimal"],d:"Clean everyday piece with broad styling flexibility.",u:"https://www.nordstrom.com/",i:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80"},
+{m:"Etsy",t:"Personalized Initial Necklace",p:59,r:4.8,n:1500,tags:["necklace","gift","initial"],d:"Personalized gift option with a strong value advantage.",u:"https://www.etsy.com/",i:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80"},
+{m:"Demo Merchant",t:"Statement Drop Earrings",p:119,r:4.5,n:330,tags:["earrings","gift","statement"],d:"Conversation-ready style for occasions and gifting.",u:"https://www.etsy.com/",i:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=80"}];
+function budget(q){let m=q.match(/(?:under|below|less than|up to)\\s*\\$?\\s*([\\d,]+)/i);return m?+m[1].replace(/,/g,""):Infinity}
+function score(x,q){q=q.toLowerCase();let s=50, text=(x.t+" "+x.d+" "+x.tags.join(" ")).toLowerCase(), b=budget(q);
+q.split(/\\s+/).filter(w=>w.length>2).forEach(w=>{if(text.includes(w))s+=7});
+if(x.p<=b)s+=18;else if(b<Infinity)s-=25;
+s+=Math.min(15,x.r*2)+Math.min(12,Math.log10(x.n+1)*5);
+if(/gift|wife|husband|anniversary|birthday/.test(q)&&x.tags.includes("gift"))s+=10;
+if(/luxury|premium/.test(q)&&x.tags.includes("luxury"))s+=9;
+return Math.max(1,Math.min(99,Math.round(s)))}
+function render(list,q){let el=document.getElementById("results");if(!list.length){el.innerHTML='<div class="empty">No strong matches. Try a broader search or a higher budget.</div>';return}
+el.innerHTML=list.map((x,i)=>{let s=score(x,q);return `<article class="card"><div class="pic"><img src="${x.i}" alt="${x.t}"></div><div class="body"><div class="merchant">${i<3?"Recommended • ":""}${x.m}</div><div class="title">${x.t}</div><div class="desc">${x.d}</div><div class="row"><div class="price">$${x.p}</div><div class="score">Match ${s}/99</div></div><div class="meta"><span class="tag">★ ${x.r}</span><span class="tag">${x.n.toLocaleString()} reviews*</span></div><div class="actions"><button class="buy" onclick="window.open('${x.u}','_blank')">View store</button><button onclick="alert('Why: request match + budget + product attributes + review signal + value.\\\\n\\\\nThis is a demo score until live feeds are connected.')">Why?</button></div></div></article>`}).join("")}
+function search(){let q=document.getElementById("q").value.trim();if(!q)return;document.getElementById("status").textContent="Comparing connected product candidates…";setTimeout(()=>{let list=products.map(x=>({x,s:score(x,q)})).sort((a,b)=>b.s-a.s).filter(a=>a.s>=45).map(a=>a.x);render(list,q);document.getElementById("status").textContent=`${list.length} candidate products ranked.`},400)}
+function demo(x){document.getElementById("q").value=x;search()}
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")search()});
+</script></body></html>
