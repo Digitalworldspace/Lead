@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Of Life — Live Amazon Shopping</title>
+<style>
+body{margin:0;background:#f7f7f5;color:#111;font-family:Arial,sans-serif}.wrap{max-width:1150px;margin:auto;padding:35px 20px}.hero{text-align:center}.hero h1{font-size:42px;margin:12px 0}.hero p{color:#666}.search{display:flex;gap:8px;background:#fff;border:1px solid #ddd;border-radius:18px;padding:8px;margin:30px auto;max-width:900px}.search input{flex:1;border:0;outline:0;padding:16px;font-size:17px}.search button{background:#111;color:#fff;border:0;border-radius:12px;padding:0 24px;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}.card{background:#fff;border:1px solid #ddd;border-radius:16px;overflow:hidden}.img{height:240px;background:#f1f1ef;display:flex;align-items:center;justify-content:center}.img img{max-width:100%;max-height:100%;object-fit:contain}.body{padding:16px}.title{font-weight:bold;line-height:1.4}.price{font-size:22px;font-weight:bold;margin:12px 0}.meta{color:#666;font-size:13px;margin:8px 0}.buy{display:block;text-align:center;text-decoration:none;background:#111;color:#fff;padding:12px;border-radius:10px}.msg{padding:50px;text-align:center;border:1px dashed #ccc;border-radius:16px;background:#fff}.error{background:#fff0f0;color:#900;padding:18px;border-radius:12px;line-height:1.5}@media(max-width:600px){.search{flex-direction:column}.search button{height:52px}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<div>STYLE OF LIFE</div>
+<h1>Shop anything. Live Amazon search.</h1>
+<p>No hard-coded products. Search a product and the backend requests live Amazon catalog results.</p>
+</div>
+<div class="search">
+<input id="q" placeholder="e.g. best laptop under $800">
+<button onclick="searchNow()">Search</button>
+</div>
+<div id="status"></div>
+<div id="results" class="grid"><div class="msg">Search for anything you want.</div></div>
+</div>
+<script>
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function money(v,c){return typeof v==="number"?new Intl.NumberFormat("en-US",{style:"currency",currency:c||"USD"}).format(v):"See Amazon"}
+function card(p){return `<div class="card"><div class="img">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.title)}">`:"No image"}</div><div class="body"><div class="title">${esc(p.title)}</div><div class="meta">${p.rating?"★ "+esc(p.rating):""}${p.reviewCount?" · "+Number(p.reviewCount).toLocaleString()+" reviews":""}</div><div class="price">${money(p.price,p.currency)}</div><a class="buy" href="${esc(p.url)}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a></div></div>`}
+async function searchNow(){
+ const q=document.getElementById("q").value.trim(); if(!q)return;
+ document.getElementById("status").innerHTML="Searching Amazon live…";
+ document.getElementById("results").innerHTML='<div class="msg">Finding live products…</div>';
+ try{
+   const r=await fetch("/api/search?q="+encodeURIComponent(q),{headers:{Accept:"application/json"}});
+   const text=await r.text();
+   let d;
+   try{d=JSON.parse(text)}catch{
+     throw new Error("The /api/search endpoint returned HTML instead of JSON. This usually means the site was uploaded to GitHub Pages or another static host without deploying the serverless API.");
+   }
+   if(!r.ok) throw new Error(d.error||"Live Amazon search failed.");
+   document.getElementById("status").innerHTML=`<p>${d.products.length} live Amazon result(s)</p>`;
+   document.getElementById("results").innerHTML=d.products.length?d.products.map(card).join(""):'<div class="msg">No matching Amazon products found.</div>';
+ }catch(e){
+   document.getElementById("status").innerHTML="";
+   document.getElementById("results").innerHTML=`<div class="error"><b>Search could not run.</b><br>${esc(e.message)}<br><br><b>Important:</b> GitHub Pages cannot run the API backend. Deploy this exact project to Vercel (or another Node/serverless host) and add the Amazon credentials there.</div>`;
+ }
+}
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")searchNow()});
+</script>
+</body>
+</html>
