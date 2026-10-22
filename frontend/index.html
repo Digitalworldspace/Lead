@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Style Of Life — Smart Amazon Shopping</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#111;background:#fff;font-family:Arial,sans-serif}.nav{padding:22px 6%;border-bottom:1px solid #e8e5df;display:flex;justify-content:space-between}.logo{font:26px Georgia,serif}.muted{color:#777}.hero{text-align:center;padding:75px 20px 45px}.hero h1{font:400 clamp(44px,7vw,78px)/1 Georgia,serif;max-width:850px;margin:18px auto}.search{max-width:780px;margin:30px auto;display:flex;border:1px solid #d8d4cd;border-radius:18px;padding:7px}.search input{flex:1;border:0;outline:0;padding:15px;font-size:16px}.search button,.buy{background:#111;color:#fff;border:0;border-radius:12px;padding:14px 22px;font-weight:700}.wrap{max-width:1150px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{border:1px solid #e6e2da;border-radius:18px;overflow:hidden}.pic{aspect-ratio:1;background:#f6f5f1}.pic img{width:100%;height:100%;object-fit:contain}.body{padding:17px}.badge{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777}.title{font:19px Georgia,serif;line-height:1.35;margin:8px 0}.price{font-weight:800;margin:10px 0}.adv{font-size:13px;color:#666;line-height:1.6}.buy{display:block;text-align:center;text-decoration:none;margin-top:15px}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:550px){.grid{grid-template-columns:1fr}.search{border-radius:14px}}
+</style></head><body><nav class="nav"><div class="logo">Style Of Life</div><div class="muted">Smart Amazon Shopping</div></nav>
+<section class="hero"><div class="muted">Curated Amazon picks by Style Of Life</div>
+<h1>Shop our latest picks.</h1><p class="muted">Browse products added by Style Of Life. New products can appear automatically.</p>
+</section>
+<section class="wrap"><div id="grid" class="grid"></div></section>
+<script>
+const grid=document.getElementById("grid");const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));let products=[];
+async function load(){
+  const r=await fetch("/api/products");
+  const d=await r.json();
+  products=d.products||[];
+  products.sort(()=>Math.random()-0.5);
+  render(products);
+}
+load();
+</script></body></html>
