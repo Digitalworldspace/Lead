@@ -1,0 +1,12 @@
+const express=require("express");const cors=require("cors");const path=require("path");const{createClient}=require("@supabase/supabase-js");require("dotenv").config();
+const app=express();app.use(cors());app.use(express.json({limit:"2mb"}));
+const supabase=createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY);
+function adminOnly(req,res,next){if(!req.headers["x-admin-token"]||req.headers["x-admin-token"]!==process.env.ADMIN_TOKEN)return res.status(401).json({error:"Invalid admin token"});next();}
+app.get("/api/health",(req,res)=>res.json({ok:true}));
+app.get("/api/products",async(req,res)=>{const{data,error}=await supabase.from("affiliate_products").select("*").eq("active",true).order("created_at",{ascending:false});if(error)return res.status(500).json({error:error.message});res.json(data||[]);});
+app.get("/api/admin/products",adminOnly,async(req,res)=>{const{data,error}=await supabase.from("affiliate_products").select("*").order("created_at",{ascending:false});if(error)return res.status(500).json({error:error.message});res.json(data||[]);});
+app.post("/api/admin/products",adminOnly,async(req,res)=>{const{title,price,image_url,description,affiliate_url}=req.body;if(!title||!affiliate_url)return res.status(400).json({error:"Title and Affiliate Link are required."});const{data,error}=await supabase.from("affiliate_products").insert([{title:String(title).trim(),price:String(price||"").trim(),image_url:String(image_url||"").trim(),description:String(description||"").trim(),affiliate_url:String(affiliate_url).trim(),active:true}]).select().single();if(error)return res.status(500).json({error:error.message});res.json(data);});
+app.patch("/api/admin/products/:id",adminOnly,async(req,res)=>{const allowed=["title","price","image_url","description","affiliate_url","active"];const update={};allowed.forEach(k=>{if(req.body[k]!==undefined)update[k]=req.body[k]});update.updated_at=new Date().toISOString();const{data,error}=await supabase.from("affiliate_products").update(update).eq("id",req.params.id).select().single();if(error)return res.status(500).json({error:error.message});res.json(data);});
+app.delete("/api/admin/products/:id",adminOnly,async(req,res)=>{const{error}=await supabase.from("affiliate_products").delete().eq("id",req.params.id);if(error)return res.status(500).json({error:error.message});res.json({success:true});});
+app.get("/admin",(req,res)=>res.sendFile(path.join(__dirname,"../frontend/admin.html")));
+module.exports=app;
