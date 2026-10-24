@@ -13,7 +13,7 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f5f5f5;
       color: #111;
     }
@@ -25,19 +25,21 @@
 
     .card {
       background: #fff;
-      padding: 30px;
+      padding: 32px;
       border-radius: 18px;
-      box-shadow: 0 10px 35px rgba(0,0,0,.08);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
     }
 
     h1 {
-      margin-top: 0;
+      margin: 0;
       text-align: center;
+      font-size: 30px;
     }
 
     .subtitle {
       text-align: center;
       color: #666;
+      margin-top: 8px;
       margin-bottom: 30px;
     }
 
@@ -50,64 +52,111 @@
     input,
     textarea {
       width: 100%;
-      padding: 13px;
+      padding: 13px 14px;
       border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 15px;
+      font-family: inherit;
       outline: none;
+      background: #fff;
     }
 
     input:focus,
     textarea:focus {
       border-color: #111;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
     }
 
     textarea {
-      min-height: 120px;
+      min-height: 130px;
       resize: vertical;
     }
 
     button {
       width: 100%;
       margin-top: 25px;
-      padding: 14px;
+      padding: 15px;
       border: 0;
       border-radius: 10px;
       background: #111;
-      color: white;
+      color: #fff;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
     }
 
     button:hover {
-      opacity: .9;
+      background: #222;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #status {
       margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
       text-align: center;
       font-weight: 600;
+      display: none;
+      word-break: break-word;
     }
 
-    .success {
-      color: green;
+    #status.success {
+      display: block;
+      color: #087a27;
+      background: #eaf8ee;
     }
 
-    .error {
-      color: red;
+    #status.error {
+      display: block;
+      color: #b00020;
+      background: #fff0f0;
     }
 
-    .token-box {
+    #status.info {
+      display: block;
+      color: #333;
+      background: #f1f1f1;
+    }
+
+    .token-section {
       margin-top: 30px;
-      padding-top: 20px;
+      padding-top: 25px;
       border-top: 1px solid #eee;
     }
 
-    small {
+    .token-note {
+      margin-top: 8px;
+      font-size: 13px;
       color: #777;
-      display: block;
-      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    .security-note {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fff8e6;
+      color: #6b5200;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 25px auto;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
     }
   </style>
 </head>
@@ -124,247 +173,166 @@
         Product Admin Portal
       </div>
 
-      <label>Product Name</label>
+
+      <!-- Product Name -->
+      <label for="productName">
+        Product Name
+      </label>
+
       <input
         id="productName"
         type="text"
         placeholder="Enter product name"
+        autocomplete="off"
       >
 
-      <label>Amazon Affiliate Link</label>
+
+      <!-- Amazon Affiliate Link -->
+      <label for="affiliateLink">
+        Amazon Affiliate Link
+      </label>
+
       <input
         id="affiliateLink"
         type="url"
         placeholder="https://link.amazon/..."
+        autocomplete="off"
       >
 
-      <label>Photo URL</label>
+
+      <!-- Photo URL -->
+      <label for="photoUrl">
+        Photo URL
+      </label>
+
       <input
         id="photoUrl"
         type="url"
-        placeholder="https://..."
+        placeholder="https://example.com/product-image.jpg"
+        autocomplete="off"
       >
 
-      <label>Price</label>
+
+      <!-- Price -->
+      <label for="price">
+        Price
+      </label>
+
       <input
         id="price"
         type="text"
         placeholder="$29.99"
+        autocomplete="off"
       >
 
-      <label>Description</label>
+
+      <!-- Description -->
+      <label for="description">
+        Description
+      </label>
+
       <textarea
         id="description"
         placeholder="Enter product description"
       ></textarea>
 
-      <button onclick="addProduct()">
-        Add Product
-      </button>
 
-      <div id="status"></div>
+      <!-- GitHub Token -->
+      <div class="token-section">
 
-      <div class="token-box">
-
-        <label>GitHub Token</label>
+        <label for="githubToken">
+          GitHub Token
+        </label>
 
         <input
           id="githubToken"
           type="password"
-          placeholder="GitHub token"
+          placeholder="github_pat_..."
+          autocomplete="new-password"
         >
 
-        <small>
-          Token is used only to update your GitHub repository.
-        </small>
+        <div class="token-note">
+          Your token is used to update products.json in your GitHub repository.
+        </div>
 
+      </div>
+
+
+      <!-- Add Product -->
+      <button
+        id="addButton"
+        type="button"
+        onclick="addProduct()"
+      >
+        Add Product
+      </button>
+
+
+      <!-- Status -->
+      <div id="status"></div>
+
+
+      <div class="security-note">
+        Never share your GitHub token with anyone.
+        Do not put the token inside your GitHub code.
       </div>
 
     </div>
 
   </div>
 
+
 <script>
 
-const OWNER = "Digitalworldspace";
-const REPO = "Lead";
-const FILE = "products.json";
-const BRANCH = "main";
+  /*
+    ==========================================
+    GITHUB SETTINGS
+    ==========================================
+  */
+
+  const OWNER = "Digitalworldspace";
+
+  const REPO = "Lead";
+
+  const FILE = "products.json";
+
+  const BRANCH = "main";
 
 
-function showStatus(message, type) {
+  /*
+    ==========================================
+    STATUS MESSAGE
+    ==========================================
+  */
 
-  const status = document.getElementById("status");
+  function showStatus(message, type) {
 
-  status.textContent = message;
+    const status =
+      document.getElementById("status");
 
-  status.className = type || "";
+    status.textContent = message;
 
-}
+    status.className = type || "info";
 
-
-async function addProduct() {
-
-  const name =
-    document.getElementById("productName").value.trim();
-
-  const affiliate =
-    document.getElementById("affiliateLink").value.trim();
-
-  const photo =
-    document.getElementById("photoUrl").value.trim();
-
-  const price =
-    document.getElementById("price").value.trim();
-
-  const description =
-    document.getElementById("description").value.trim();
-
-  const token =
-    document.getElementById("githubToken").value.trim();
-
-
-  if (!name ||
-      !affiliate ||
-      !photo ||
-      !price ||
-      !description) {
-
-    showStatus(
-      "Please fill all 5 fields.",
-      "error"
-    );
-
-    return;
   }
 
 
-  if (!token) {
+  /*
+    ==========================================
+    READ JSON FILE FROM GITHUB
+    ==========================================
+  */
 
-    showStatus(
-      "Please enter GitHub Token.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  try {
-
-    showStatus(
-      "Loading products...",
-      ""
-    );
-
+  async function getProductsFile(token) {
 
     const apiUrl =
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}?ref=${BRANCH}`;
 
 
-    const getResponse =
+    const response =
       await fetch(apiUrl, {
 
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/vnd.github+json"
-        }
-
-      });
-
-
-    if (!getResponse.ok) {
-
-      throw new Error(
-        "Could not read products.json"
-      );
-
-    }
-
-
-    const fileData =
-      await getResponse.json();
-
-
-    const decoded =
-      decodeURIComponent(
-        escape(
-          atob(
-            fileData.content.replace(/\n/g, "")
-          )
-        )
-      );
-
-
-    let products = [];
-
-
-    try {
-
-      products = JSON.parse(decoded);
-
-    } catch {
-
-      products = [];
-
-    }
-
-
-    if (!Array.isArray(products)) {
-
-      products = [];
-
-    }
-
-
-    const newProduct = {
-
-      title: name,
-
-      price: price,
-
-      image: photo,
-
-      description: description,
-
-      link: affiliate,
-
-      active: true
-
-    };
-
-
-    products.push(newProduct);
-
-
-    const newContent =
-      JSON.stringify(
-        products,
-        null,
-        2
-      ) + "\n";
-
-
-    const encodedContent =
-      btoa(
-        unescape(
-          encodeURIComponent(
-            newContent
-          )
-        )
-      );
-
-
-    showStatus(
-      "Saving product to GitHub...",
-      ""
-    );
-
-
-    const updateResponse =
-      await fetch(apiUrl, {
-
-        method: "PUT",
+        method: "GET",
 
         headers: {
 
@@ -374,82 +342,538 @@ async function addProduct() {
           "Accept":
             "application/vnd.github+json",
 
-          "Content-Type":
-            "application/json"
+          "X-GitHub-Api-Version":
+            "2022-11-28"
 
-        },
-
-        body: JSON.stringify({
-
-          message:
-            `Add product: ${name}`,
-
-          content:
-            encodedContent,
-
-          sha:
-            fileData.sha,
-
-          branch:
-            BRANCH
-
-        })
+        }
 
       });
 
 
-    if (!updateResponse.ok) {
+    /*
+      If GitHub returns an error,
+      show the REAL GitHub error.
+    */
 
-      const errorData =
-        await updateResponse.json();
+    if (!response.ok) {
+
+      let errorMessage =
+        `GitHub HTTP ${response.status}`;
+
+      try {
+
+        const errorData =
+          await response.json();
+
+        if (errorData.message) {
+
+          errorMessage =
+            errorData.message;
+
+        }
+
+      } catch (error) {
+        // Keep HTTP error
+      }
 
       throw new Error(
-        errorData.message ||
-        "GitHub update failed"
+        errorMessage
       );
 
     }
 
 
-    document.getElementById(
-      "productName"
-    ).value = "";
-
-    document.getElementById(
-      "affiliateLink"
-    ).value = "";
-
-    document.getElementById(
-      "photoUrl"
-    ).value = "";
-
-    document.getElementById(
-      "price"
-    ).value = "";
-
-    document.getElementById(
-      "description"
-    ).value = "";
-
-
-    showStatus(
-      "✅ Product added successfully!",
-      "success"
-    );
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    showStatus(
-      "❌ " + error.message,
-      "error"
-    );
+    return await response.json();
 
   }
 
-}
+
+  /*
+    ==========================================
+    DECODE GITHUB FILE
+    ==========================================
+  */
+
+  function decodeGitHubContent(base64Content) {
+
+    const cleanBase64 =
+      base64Content.replace(/\n/g, "");
+
+
+    const binary =
+      atob(cleanBase64);
+
+
+    const bytes =
+      Uint8Array.from(
+        binary,
+        character =>
+          character.charCodeAt(0)
+      );
+
+
+    return new TextDecoder(
+      "utf-8"
+    ).decode(bytes);
+
+  }
+
+
+  /*
+    ==========================================
+    ENCODE FILE FOR GITHUB
+    ==========================================
+  */
+
+  function encodeGitHubContent(text) {
+
+    const bytes =
+      new TextEncoder().encode(text);
+
+
+    let binary = "";
+
+
+    for (
+      let i = 0;
+      i < bytes.length;
+      i++
+    ) {
+
+      binary +=
+        String.fromCharCode(
+          bytes[i]
+        );
+
+    }
+
+
+    return btoa(binary);
+
+  }
+
+
+  /*
+    ==========================================
+    ADD PRODUCT
+    ==========================================
+  */
+
+  async function addProduct() {
+
+    const button =
+      document.getElementById(
+        "addButton"
+      );
+
+
+    /*
+      Get form values
+    */
+
+    const name =
+      document.getElementById(
+        "productName"
+      ).value.trim();
+
+
+    const affiliate =
+      document.getElementById(
+        "affiliateLink"
+      ).value.trim();
+
+
+    const photo =
+      document.getElementById(
+        "photoUrl"
+      ).value.trim();
+
+
+    const price =
+      document.getElementById(
+        "price"
+      ).value.trim();
+
+
+    const description =
+      document.getElementById(
+        "description"
+      ).value.trim();
+
+
+    const token =
+      document.getElementById(
+        "githubToken"
+      ).value.trim();
+
+
+    /*
+      Validate fields
+    */
+
+    if (!name) {
+
+      showStatus(
+        "Please enter Product Name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!affiliate) {
+
+      showStatus(
+        "Please enter Amazon Affiliate Link.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!photo) {
+
+      showStatus(
+        "Please enter Photo URL.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!price) {
+
+      showStatus(
+        "Please enter Price.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!description) {
+
+      showStatus(
+        "Please enter Description.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!token) {
+
+      showStatus(
+        "Please enter GitHub Token.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Disable button
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+      "Saving...";
+
+
+    try {
+
+      /*
+        Step 1:
+        Read products.json
+      */
+
+      showStatus(
+        "Reading products.json from GitHub...",
+        "info"
+      );
+
+
+      const fileData =
+        await getProductsFile(
+          token
+        );
+
+
+      /*
+        Step 2:
+        Decode products.json
+      */
+
+      const decoded =
+        decodeGitHubContent(
+          fileData.content
+        );
+
+
+      /*
+        Step 3:
+        Parse JSON
+      */
+
+      let products;
+
+
+      try {
+
+        products =
+          JSON.parse(decoded);
+
+      } catch (error) {
+
+        throw new Error(
+          "products.json contains invalid JSON."
+        );
+
+      }
+
+
+      /*
+        Make sure it is an array
+      */
+
+      if (!Array.isArray(products)) {
+
+        throw new Error(
+          "products.json must contain a JSON array."
+        );
+
+      }
+
+
+      /*
+        Step 4:
+        Create new product
+      */
+
+      const newProduct = {
+
+        title: name,
+
+        price: price,
+
+        image: photo,
+
+        description: description,
+
+        link: affiliate,
+
+        active: true
+
+      };
+
+
+      /*
+        Step 5:
+        Add product
+      */
+
+      products.push(
+        newProduct
+      );
+
+
+      /*
+        Step 6:
+        Create new JSON
+      */
+
+      const newContent =
+        JSON.stringify(
+          products,
+          null,
+          2
+        ) + "\n";
+
+
+      /*
+        Step 7:
+        Encode JSON
+      */
+
+      const encodedContent =
+        encodeGitHubContent(
+          newContent
+        );
+
+
+      /*
+        Step 8:
+        GitHub API URL
+      */
+
+      const apiUrl =
+        `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
+
+
+      /*
+        Step 9:
+        Update GitHub
+      */
+
+      showStatus(
+        "Adding product to GitHub...",
+        "info"
+      );
+
+
+      const updateResponse =
+        await fetch(apiUrl, {
+
+          method: "PUT",
+
+          headers: {
+
+            "Authorization":
+              `Bearer ${token}`,
+
+            "Accept":
+              "application/vnd.github+json",
+
+            "Content-Type":
+              "application/json",
+
+            "X-GitHub-Api-Version":
+              "2022-11-28"
+
+          },
+
+          body: JSON.stringify({
+
+            message:
+              `Add product: ${name}`,
+
+            content:
+              encodedContent,
+
+            sha:
+              fileData.sha,
+
+            branch:
+              BRANCH
+
+          })
+
+        });
+
+
+      /*
+        Check GitHub response
+      */
+
+      if (!updateResponse.ok) {
+
+        let errorMessage =
+          `GitHub HTTP ${updateResponse.status}`;
+
+
+        try {
+
+          const errorData =
+            await updateResponse.json();
+
+
+          if (
+            errorData.message
+          ) {
+
+            errorMessage =
+              errorData.message;
+
+          }
+
+        } catch (error) {
+          // Keep HTTP error
+        }
+
+
+        throw new Error(
+          errorMessage
+        );
+
+      }
+
+
+      /*
+        Product successfully added
+      */
+
+      showStatus(
+        "✅ Product added successfully to GitHub!",
+        "success"
+      );
+
+
+      /*
+        Clear product fields
+      */
+
+      document.getElementById(
+        "productName"
+      ).value = "";
+
+
+      document.getElementById(
+        "affiliateLink"
+      ).value = "";
+
+
+      document.getElementById(
+        "photoUrl"
+      ).value = "";
+
+
+      document.getElementById(
+        "price"
+      ).value = "";
+
+
+      document.getElementById(
+        "description"
+      ).value = "";
+
+
+    } catch (error) {
+
+      console.error(
+        "Product save error:",
+        error
+      );
+
+
+      showStatus(
+        "❌ " + error.message,
+        "error"
+      );
+
+
+    } finally {
+
+      button.disabled = false;
+
+      button.textContent =
+        "Add Product";
+
+    }
+
+  }
 
 </script>
 
