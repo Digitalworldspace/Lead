@@ -1,531 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Style Of Life | Product Admin</title>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<title>Style Of Life - Admin</title>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #ffffff 0%, #f5f5f5 45%, #eeeeee 100%);
+      color: #111;
+      min-height: 100vh;
+    }
 
-<style>
+    .container {
+      width: min(680px, calc(100% - 28px));
+      margin: 35px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 15px 50px rgba(0,0,0,.10);
+    }
 
-* {
-  box-sizing: border-box;
-}
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  color: #111;
-}
+    .brand h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -1px;
+    }
 
-.container {
-  width: min(700px, 92%);
-  margin: 50px auto;
-}
+    .brand p {
+      margin: 7px 0 0;
+      color: #777;
+    }
 
-.card {
-  background: #fff;
-  padding: 32px;
-  border-radius: 18px;
-  box-shadow: 0 10px 35px rgba(0,0,0,.08);
-}
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
 
-h1 {
-  text-align: center;
-  margin: 0;
-}
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 11px;
+      padding: 13px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+      transition: .2s;
+    }
 
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin: 8px 0 30px;
-}
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #111;
+      box-shadow: 0 0 0 3px rgba(0,0,0,.06);
+    }
 
-label {
-  display: block;
-  font-weight: 600;
-  margin: 18px 0 8px;
-}
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
 
-input,
-textarea {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 15px;
-}
+    .currency-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
+    .currency-box {
+      padding: 15px;
+      border-radius: 14px;
+      background: #f8f8f8;
+      border: 1px solid #eee;
+    }
 
-button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 15px;
-  border: 0;
-  border-radius: 10px;
-  background: #111;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
+    .currency-preview {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #777;
+    }
 
-button:disabled {
-  opacity: .6;
-}
+    button {
+      width: 100%;
+      margin-top: 24px;
+      border: 0;
+      border-radius: 11px;
+      padding: 14px;
+      background: #111;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+    }
 
-#status {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 600;
-  display: none;
-}
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.18);
+    }
 
-.success {
-  display: block !important;
-  background: #eaf8ee;
-  color: #087a27;
-}
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
 
-.error {
-  display: block !important;
-  background: #fff0f0;
-  color: #b00020;
-}
+    #status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-.login {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 25px;
-  margin-bottom: 25px;
-}
+    .success {
+      display: block !important;
+      background: #eaf8ef;
+      color: #176b36;
+    }
 
-.hidden {
-  display: none;
-}
+    .error {
+      display: block !important;
+      background: #fff0f0;
+      color: #a40000;
+    }
 
-</style>
+    .note {
+      margin-top: 20px;
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.5;
+    }
 
+    @media(max-width:600px) {
+      .container {
+        padding: 22px;
+        margin: 18px auto;
+      }
+
+      .currency-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="card">
+  <div class="brand">
+    <h1>Style Of Life</h1>
+    <p>Product Admin Portal</p>
+  </div>
 
-<h1>Style Of Life</h1>
+  <label>Admin Password</label>
+  <input
+    type="password"
+    id="adminPassword"
+    placeholder="Enter admin password"
+  >
 
-<div class="subtitle">
-Product Admin Portal
-</div>
+  <label>Product Name</label>
+  <input
+    type="text"
+    id="productName"
+    placeholder="Enter product name"
+  >
 
+  <label>Amazon Affiliate Link</label>
+  <input
+    type="url"
+    id="affiliateLink"
+    placeholder="https://..."
+  >
 
-<!-- LOGIN -->
+  <label>Photo URL</label>
+  <input
+    type="url"
+    id="photoUrl"
+    placeholder="https://..."
+  >
 
-<div id="loginBox" class="login">
+  <div class="currency-row">
 
-<label>
-Admin Password
-</label>
+    <div class="currency-box">
+      <label>Price</label>
+      <input
+        type="number"
+        id="price"
+        min="0"
+        step="0.01"
+        placeholder="299"
+      >
+      <div class="currency-preview">
+        Product's original price
+      </div>
+    </div>
 
-<input
-  id="adminPassword"
-  type="password"
-  placeholder="Enter admin password"
->
+    <div class="currency-box">
+      <label>Product Currency</label>
 
-<button
-  onclick="login()"
->
-Continue
-</button>
+      <select id="currency">
+        <option value="INR" selected>🇮🇳 INR ₹ — Indian Rupee</option>
+        <option value="USD">🇺🇸 USD $ — US Dollar</option>
+        <option value="GBP">🇬🇧 GBP £ — British Pound</option>
+        <option value="EUR">🇪🇺 EUR € — Euro</option>
+        <option value="CAD">🇨🇦 CAD $ — Canadian Dollar</option>
+        <option value="AUD">🇦🇺 AUD $ — Australian Dollar</option>
+      </select>
 
-</div>
+      <div class="currency-preview" id="currencyPreview">
+        Price will be stored in INR
+      </div>
+    </div>
 
+  </div>
 
-<!-- PRODUCT FORM -->
+  <label>Description</label>
+  <textarea
+    id="description"
+    placeholder="Write a short product description..."
+  ></textarea>
 
-<div
-  id="productBox"
-  class="hidden"
->
+  <button id="addButton">
+    Add Product
+  </button>
 
+  <div id="status"></div>
 
-<label>
-Product Name
-</label>
-
-<input
-  id="productName"
-  type="text"
-  placeholder="Enter product name"
->
-
-
-<label>
-Amazon Affiliate Link
-</label>
-
-<input
-  id="affiliateLink"
-  type="url"
-  placeholder="https://link.amazon/..."
->
-
-
-<label>
-Photo URL
-</label>
-
-<input
-  id="photoUrl"
-  type="url"
-  placeholder="https://..."
->
-
-
-<label>
-Price
-</label>
-
-<input
-  id="price"
-  type="text"
-  placeholder="$29.99"
->
-
-
-<label>
-Description
-</label>
-
-<textarea
-  id="description"
-  placeholder="Enter product description"
-></textarea>
-
-
-<button
-  id="addButton"
-  onclick="addProduct()"
->
-Add Product
-</button>
-
-
-<div id="status"></div>
+  <div class="note">
+    Your product is securely sent to the backend and saved into GitHub.
+    <br>
+    Never enter your GitHub token here.
+  </div>
 
 </div>
-
-</div>
-
-</div>
-
 
 <script>
 
-/*
-========================================
-YOUR BACKEND URL
-========================================
-*/
-
 const API_URL =
-  "https://lead-1-6z64.onrender.com";
+  "https://lead-1-67z4.onrender.com";
 
+const currencySelect =
+  document.getElementById("currency");
 
-let adminPassword = "";
+const currencyPreview =
+  document.getElementById("currencyPreview");
 
+currencySelect.addEventListener("change", () => {
 
-/*
-========================================
-LOGIN
-========================================
-*/
+  const currency =
+    currencySelect.value;
 
-function login() {
+  const symbols = {
+    USD: "$",
+    INR: "₹",
+    GBP: "£",
+    EUR: "€",
+    CAD: "CA$",
+    AUD: "A$"
+  };
 
-  const password =
-    document
-      .getElementById("adminPassword")
-      .value
-      .trim();
+  currencyPreview.textContent =
+    "Price will be stored in " +
+    currency +
+    " " +
+    symbols[currency];
+});
 
+document
+  .getElementById("addButton")
+  .addEventListener("click", async () => {
 
-  if (!password) {
+    const button =
+      document.getElementById("addButton");
 
-    alert(
-      "Please enter admin password."
-    );
+    const status =
+      document.getElementById("status");
 
-    return;
+    const adminPassword =
+      document.getElementById("adminPassword").value.trim();
 
-  }
+    const productName =
+      document.getElementById("productName").value.trim();
 
+    const affiliateLink =
+      document.getElementById("affiliateLink").value.trim();
 
-  adminPassword =
-    password;
+    const photoUrl =
+      document.getElementById("photoUrl").value.trim();
 
+    const price =
+      document.getElementById("price").value.trim();
 
-  document
-    .getElementById("loginBox")
-    .classList
-    .add("hidden");
+    const currency =
+      document.getElementById("currency").value;
 
+    const description =
+      document.getElementById("description").value.trim();
 
-  document
-    .getElementById("productBox")
-    .classList
-    .remove("hidden");
+    status.className = "";
+    status.style.display = "none";
 
-}
+    if (
+      !adminPassword ||
+      !productName ||
+      !affiliateLink ||
+      !photoUrl ||
+      !price ||
+      !description
+    ) {
+      status.textContent =
+        "❌ Please fill all fields.";
 
-
-/*
-========================================
-STATUS
-========================================
-*/
-
-function showStatus(
-  message,
-  type
-) {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-  status.textContent =
-    message;
-
-  status.className =
-    type || "";
-
-}
-
-
-/*
-========================================
-ADD PRODUCT
-========================================
-*/
-
-async function addProduct() {
-
-  const button =
-    document.getElementById(
-      "addButton"
-    );
-
-
-  const productName =
-    document
-      .getElementById(
-        "productName"
-      )
-      .value
-      .trim();
-
-
-  const affiliateLink =
-    document
-      .getElementById(
-        "affiliateLink"
-      )
-      .value
-      .trim();
-
-
-  const photoUrl =
-    document
-      .getElementById(
-        "photoUrl"
-      )
-      .value
-      .trim();
-
-
-  const price =
-    document
-      .getElementById(
-        "price"
-      )
-      .value
-      .trim();
-
-
-  const description =
-    document
-      .getElementById(
-        "description"
-      )
-      .value
-      .trim();
-
-
-  if (
-    !productName ||
-    !affiliateLink ||
-    !photoUrl ||
-    !price ||
-    !description
-  ) {
-
-    showStatus(
-      "Please fill all 5 fields.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "Saving...";
-
-
-  showStatus(
-    "Saving product...",
-    ""
-  );
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "/api/products",
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "X-Admin-Password":
-              adminPassword
-
-          },
-
-          body: JSON.stringify({
-
-            productName,
-
-            affiliateLink,
-
-            photoUrl,
-
-            price,
-
-            description
-
-          })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.message ||
-        "Could not add product."
-      );
-
+      status.className = "error";
+      return;
     }
 
+    button.disabled = true;
+    button.textContent = "Adding Product...";
 
-    showStatus(
-      "✅ Product added successfully!",
-      "success"
-    );
+    try {
 
+      const response =
+        await fetch(
+          API_URL + "/api/products",
+          {
+            method: "POST",
 
-    document
-      .getElementById(
-        "productName"
-      )
-      .value = "";
+            headers: {
+              "Content-Type": "application/json",
+              "X-Admin-Password": adminPassword
+            },
 
+            body: JSON.stringify({
+              productName,
+              affiliateLink,
+              photoUrl,
+              price,
+              currency,
+              description
+            })
+          }
+        );
 
-    document
-      .getElementById(
-        "affiliateLink"
-      )
-      .value = "";
+      const text =
+        await response.text();
 
+      let data;
 
-    document
-      .getElementById(
-        "photoUrl"
-      )
-      .value = "";
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          "Backend returned an unexpected response."
+        );
+      }
 
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "Could not add product."
+        );
+      }
 
-    document
-      .getElementById(
-        "price"
-      )
-      .value = "";
+      status.textContent =
+        "✅ Product added successfully to GitHub!";
 
+      status.className = "success";
 
-    document
-      .getElementById(
-        "description"
-      )
-      .value = "";
+      document
+        .getElementById("productName")
+        .value = "";
 
+      document
+        .getElementById("affiliateLink")
+        .value = "";
 
-  } catch (error) {
+      document
+        .getElementById("photoUrl")
+        .value = "";
 
-    console.error(error);
+      document
+        .getElementById("price")
+        .value = "";
 
+      document
+        .getElementById("description")
+        .value = "";
 
-    showStatus(
-      "❌ " +
-      error.message,
-      "error"
-    );
+    } catch (error) {
 
-  }
+      status.textContent =
+        "❌ " + error.message;
 
+      status.className = "error";
 
-  button.disabled =
-    false;
+    } finally {
 
-  button.textContent =
-    "Add Product";
+      button.disabled = false;
+      button.textContent = "Add Product";
+    }
 
-}
+  });
 
 </script>
 
 </body>
-
 </html>
