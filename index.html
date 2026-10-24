@@ -1,2484 +1,1437 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
+<title>Style Of Life | Find Something You Like</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="description"
+  content="Discover products you may love at Style Of Life."
+>
 
-  <meta
-    name="description"
-    content="Style Of Life — thoughtfully selected products for people who care about what they choose."
-  >
+<style>
 
-  <title>
-    Style Of Life | Find Something You'll Love
-  </title>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
+html{
+  scroll-behavior:smooth;
+}
 
-  <style>
+body{
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    * {
-      box-sizing: border-box;
-    }
+  background:#ffffff;
+  color:#111111;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* =========================
+   HEADER
+========================= */
 
-    body {
-      margin: 0;
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
 
-      font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
+  height:70px;
 
-      color: #111;
+  background:rgba(255,255,255,.96);
 
-      background:
-        #ffffff;
+  backdrop-filter:blur(12px);
 
-      line-height: 1.5;
-    }
+  border-bottom:1px solid #eeeeee;
 
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-    /* =========================
-       GLOBAL
-    ========================= */
+  padding:0 6%;
+}
 
-    button,
-    select,
-    input {
-      font: inherit;
-    }
+.logo{
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:1.5px;
+}
 
-    a {
-      color: inherit;
-    }
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
+.currency{
+  border:1px solid #dddddd;
+  background:#ffffff;
 
-    /* =========================
-       TOP NOTICE
-    ========================= */
+  padding:9px 13px;
 
-    .top-notice {
+  border-radius:20px;
 
-      background: #111;
+  font-size:13px;
 
-      color: #fff;
+  outline:none;
 
-      text-align: center;
+  cursor:pointer;
+}
 
-      padding: 9px 15px;
+/* =========================
+   HERO
+========================= */
 
-      font-size: 12px;
+.hero{
+  text-align:center;
 
-      letter-spacing: .2px;
-    }
+  padding:55px 20px 30px;
+}
 
+.hero h1{
+  font-size:42px;
+  line-height:1.15;
 
-    /* =========================
-       HEADER
-    ========================= */
+  font-weight:700;
 
-    header {
+  margin-bottom:12px;
+}
 
-      position: sticky;
+.hero p{
+  color:#777777;
 
-      top: 0;
+  font-size:16px;
 
-      z-index: 1000;
+  line-height:1.5;
+}
 
-      background:
-        rgba(255,255,255,.94);
+/* =========================
+   SEARCH
+========================= */
 
-      backdrop-filter:
-        blur(18px);
+.search-box{
+  max-width:500px;
 
-      border-bottom:
-        1px solid #eeeeee;
-    }
+  margin:20px auto 15px;
 
+  padding:0 20px;
+}
 
-    .nav {
+.search-box input{
+  width:100%;
 
-      max-width: 1320px;
+  height:48px;
 
-      margin: auto;
+  border:1px solid #dddddd;
 
-      min-height: 72px;
+  border-radius:25px;
 
-      padding:
-        0 28px;
+  padding:0 20px;
 
-      display: flex;
+  font-size:14px;
 
-      align-items: center;
+  outline:none;
 
-      justify-content: space-between;
+  transition:.2s;
+}
 
-      gap: 20px;
-    }
+.search-box input:focus{
+  border-color:#111111;
+}
 
+/* =========================
+   MAIN AI AREA
+========================= */
 
-    .brand {
+.ai-section{
+  max-width:900px;
 
-      text-decoration: none;
+  margin:20px auto 80px;
 
-      font-size: 23px;
+  padding:0 20px;
+}
 
-      font-weight: 800;
+.ai-heading{
+  text-align:center;
 
-      letter-spacing: -1.2px;
+  font-size:29px;
 
-      white-space: nowrap;
-    }
+  font-weight:700;
 
+  margin-bottom:25px;
+}
 
-    .nav-center {
+/* =========================
+   FEATURED PRODUCT
+========================= */
 
-      display: flex;
+.featured-product{
+  max-width:500px;
 
-      align-items: center;
+  margin:auto;
 
-      gap: 28px;
+  background:#ffffff;
 
-      color: #555;
+  border:1px solid #eeeeee;
 
-      font-size: 13px;
-    }
+  border-radius:25px;
 
+  padding:15px;
 
-    .nav-center a {
+  box-shadow:
+    0 18px 55px
+    rgba(0,0,0,.08);
 
-      text-decoration: none;
+  transition:.3s;
+}
 
-      transition:
-        color .2s ease;
-    }
+.featured-product:hover{
+  transform:translateY(-3px);
+}
 
+.featured-image{
+  position:relative;
 
-    .nav-center a:hover {
-      color: #000;
-    }
+  width:100%;
 
+  height:430px;
 
-    .nav-right {
+  background:#fafafa;
 
-      display: flex;
+  border-radius:19px;
 
-      align-items: center;
+  overflow:hidden;
+}
 
-      gap: 10px;
-    }
+.featured-image img{
+  width:100%;
+  height:100%;
 
+  object-fit:contain;
+}
 
-    .currency-select {
+.like-badge{
+  position:absolute;
 
-      border:
-        1px solid #dddddd;
+  top:15px;
+  left:15px;
 
-      border-radius: 30px;
+  background:#ffffff;
 
-      background: #fff;
+  padding:8px 13px;
 
-      padding:
-        9px 13px;
+  border-radius:20px;
 
-      font-size: 12px;
+  font-size:13px;
 
-      font-weight: 700;
+  font-weight:600;
 
-      cursor: pointer;
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.10);
+}
 
-      outline: none;
-    }
+.featured-info{
+  text-align:center;
 
+  padding:18px 8px 8px;
+}
 
-    /* =========================
-       HERO
-    ========================= */
+.featured-info h2{
+  font-size:21px;
 
-    .hero {
+  line-height:1.35;
 
-      position: relative;
+  margin-bottom:8px;
+}
 
-      overflow: hidden;
+.featured-price{
+  font-size:20px;
 
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff 0%,
-          #fafafa 55%,
-          #f1f1f1 100%
-        );
+  font-weight:700;
 
-      padding:
-        95px 25px
-        85px;
-    }
+  margin-bottom:18px;
+}
 
+/* =========================
+   LIKE BUTTONS
+========================= */
 
-    .hero::before {
+.choice-buttons{
+  display:flex;
 
-      content: "";
+  gap:10px;
+}
 
-      position: absolute;
+.choice-buttons button{
+  flex:1;
 
-      width: 420px;
+  height:48px;
 
-      height: 420px;
+  border-radius:25px;
 
-      border-radius: 50%;
+  border:1px solid #dddddd;
 
-      background:
-        rgba(0,0,0,.035);
+  background:#ffffff;
 
-      top: -200px;
+  color:#111111;
 
-      right: -130px;
-    }
+  font-size:14px;
 
+  font-weight:600;
 
-    .hero-inner {
+  cursor:pointer;
 
-      position: relative;
+  transition:.2s;
+}
 
-      max-width: 950px;
+.choice-buttons button:hover{
+  transform:translateY(-2px);
+}
 
-      margin: auto;
+.yes-button{
+  background:#111111 !important;
 
-      text-align: center;
+  color:#ffffff !important;
 
-      animation:
-        heroIn .8s ease both;
-    }
+  border-color:#111111 !important;
+}
 
+/* =========================
+   VIEW PRODUCT
+========================= */
 
-    @keyframes heroIn {
+.view-product{
+  display:block;
 
-      from {
-        opacity: 0;
-        transform:
-          translateY(20px);
-      }
+  margin-top:10px;
 
-      to {
-        opacity: 1;
-        transform:
-          translateY(0);
-      }
-    }
+  width:100%;
 
+  height:48px;
 
-    .eyebrow {
+  line-height:48px;
 
-      display: inline-flex;
+  text-align:center;
 
-      align-items: center;
+  text-decoration:none;
 
-      gap: 8px;
+  border-radius:25px;
 
-      padding:
-        8px 13px;
+  background:#111111;
 
-      border:
-        1px solid #e1e1e1;
+  color:#ffffff;
 
-      border-radius: 30px;
+  font-size:14px;
 
-      background:
-        rgba(255,255,255,.75);
+  font-weight:600;
 
-      font-size: 11px;
+  transition:.2s;
+}
 
-      font-weight: 800;
+.view-product:hover{
+  opacity:.85;
+}
 
-      letter-spacing:
-        1.2px;
+/* =========================
+   AI MESSAGE
+========================= */
 
-      text-transform:
-        uppercase;
-    }
+.ai-message{
+  text-align:center;
 
+  margin-top:25px;
 
-    .eyebrow-dot {
+  min-height:25px;
 
-      width: 7px;
+  color:#666666;
 
-      height: 7px;
+  font-size:14px;
+}
 
-      border-radius: 50%;
+/* =========================
+   RECOMMENDATION
+========================= */
 
-      background: #111;
-    }
+.recommendation{
+  display:none;
 
+  margin-top:70px;
+}
 
-    .hero h1 {
+.recommendation-title{
+  text-align:center;
 
-      margin:
-        24px auto 0;
+  font-size:27px;
 
-      max-width: 900px;
+  margin-bottom:25px;
+}
 
-      font-size:
-        clamp(43px, 7vw, 82px);
+.recommendation-grid{
+  display:grid;
 
-      line-height:
-        .98;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(210px,1fr)
+    );
 
-      letter-spacing:
-        -4px;
+  gap:20px;
+}
 
-      font-weight: 850;
-    }
+/* =========================
+   PRODUCT CARD
+========================= */
 
+.product-card{
+  background:#ffffff;
 
-    .hero h1 span {
-      color: #777;
-    }
+  border:1px solid #eeeeee;
 
+  border-radius:18px;
 
-    .hero-text {
+  padding:12px;
 
-      max-width: 650px;
+  transition:.25s;
+}
 
-      margin:
-        26px auto 0;
+.product-card:hover{
+  transform:translateY(-5px);
 
-      color: #666;
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.08);
+}
 
-      font-size: 17px;
+.product-image{
+  width:100%;
 
-      line-height: 1.75;
-    }
+  height:230px;
 
+  border-radius:14px;
 
-    .hero-actions {
+  background:#fafafa;
 
-      display: flex;
+  overflow:hidden;
+}
 
-      justify-content: center;
+.product-image img{
+  width:100%;
+  height:100%;
 
-      gap: 12px;
+  object-fit:contain;
+}
 
-      flex-wrap: wrap;
+.product-info{
+  padding:12px 4px 4px;
+}
 
-      margin-top: 32px;
-    }
+.product-info h3{
+  font-size:16px;
 
+  line-height:1.35;
 
-    .primary-btn,
-    .secondary-btn {
+  margin-bottom:7px;
+}
 
-      display: inline-flex;
+.product-price{
+  font-size:16px;
 
-      align-items: center;
+  font-weight:700;
+}
 
-      justify-content: center;
+.card-button{
+  display:block;
 
-      min-height: 48px;
+  text-align:center;
 
-      padding:
-        0 23px;
+  margin-top:12px;
 
-      border-radius: 12px;
+  padding:11px;
 
-      text-decoration: none;
+  border-radius:22px;
 
-      font-size: 13px;
+  background:#111111;
 
-      font-weight: 800;
+  color:#ffffff;
 
-      transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-    }
+  text-decoration:none;
 
+  font-size:13px;
 
-    .primary-btn {
+  font-weight:600;
+}
 
-      color: #fff;
+/* =========================
+   ALL PRODUCTS
+========================= */
 
-      background: #111;
-    }
+.all-products{
+  max-width:1200px;
 
+  margin:0 auto;
 
-    .secondary-btn {
+  padding:0 20px 80px;
+}
 
-      color: #111;
+.section-title{
+  text-align:center;
 
-      background: #fff;
+  font-size:27px;
 
-      border:
-        1px solid #ddd;
-    }
+  margin-bottom:25px;
+}
 
+.all-grid{
+  display:grid;
 
-    .primary-btn:hover,
-    .secondary-btn:hover {
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px,1fr)
+    );
 
-      transform:
-        translateY(-3px);
+  gap:20px;
+}
 
-      box-shadow:
-        0 12px 30px
-        rgba(0,0,0,.12);
-    }
+/* =========================
+   TRUST
+========================= */
 
+.trust-section{
+  border-top:1px solid #eeeeee;
 
-    /* =========================
-       TRUST STRIP
-    ========================= */
+  border-bottom:1px solid #eeeeee;
 
-    .trust-strip {
+  padding:45px 20px;
 
-      max-width: 1180px;
+  margin-bottom:70px;
+}
 
-      margin:
-        -28px auto 0;
+.trust-grid{
+  max-width:1000px;
 
-      position: relative;
+  margin:auto;
 
-      z-index: 5;
+  display:grid;
 
-      padding:
-        0 20px;
-    }
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
 
+  gap:30px;
 
-    .trust-inner {
+  text-align:center;
+}
 
-      background: #fff;
+.trust-item strong{
+  display:block;
 
-      border:
-        1px solid #eeeeee;
+  font-size:15px;
 
-      border-radius: 18px;
+  margin-bottom:6px;
+}
 
-      box-shadow:
-        0 18px 55px
-        rgba(0,0,0,.08);
+.trust-item span{
+  color:#777777;
 
-      display: grid;
+  font-size:13px;
+}
 
-      grid-template-columns:
-        repeat(3,1fr);
+/* =========================
+   FOOTER
+========================= */
 
-      overflow: hidden;
-    }
+footer{
+  border-top:1px solid #eeeeee;
 
+  padding:30px 20px;
 
-    .trust-item {
+  text-align:center;
 
-      padding:
-        22px 20px;
+  color:#777777;
 
-      text-align: center;
+  font-size:13px;
+}
 
-      border-right:
-        1px solid #eeeeee;
-    }
+footer strong{
+  color:#111111;
+}
 
+/* =========================
+   EMPTY / LOADING
+========================= */
 
-    .trust-item:last-child {
-      border-right: 0;
-    }
+.message{
+  text-align:center;
 
+  color:#777777;
 
-    .trust-icon {
+  padding:50px 20px;
+}
 
-      font-size: 21px;
+/* =========================
+   MOBILE
+========================= */
 
-      margin-bottom: 7px;
-    }
+@media(max-width:700px){
 
+  header{
+    padding:0 18px;
+  }
 
-    .trust-title {
+  .logo{
+    font-size:17px;
+  }
 
-      font-size: 13px;
+  .hero{
+    padding-top:40px;
+  }
 
-      font-weight: 800;
-    }
+  .hero h1{
+    font-size:31px;
+  }
 
+  .hero p{
+    font-size:14px;
+  }
 
-    .trust-text {
+  .ai-heading{
+    font-size:24px;
+  }
 
-      margin-top: 4px;
+  .featured-image{
+    height:340px;
+  }
 
-      color: #777;
+  .trust-grid{
+    grid-template-columns:1fr;
 
-      font-size: 11px;
-    }
+    gap:22px;
+  }
 
+  .recommendation-title,
+  .section-title{
+    font-size:23px;
+  }
 
-    /* =========================
-       CONVERSATIONAL INTRO
-    ========================= */
+}
 
-    .conversation {
+/* =========================
+   VERY SMALL MOBILE
+========================= */
 
-      max-width: 850px;
+@media(max-width:400px){
 
-      margin: auto;
+  .currency{
+    padding:8px 9px;
 
-      padding:
-        90px 25px
-        60px;
+    font-size:12px;
+  }
 
-      text-align: center;
-    }
+  .logo{
+    font-size:15px;
+  }
 
+  .hero h1{
+    font-size:27px;
+  }
 
-    .conversation-label {
+  .featured-image{
+    height:300px;
+  }
 
-      font-size: 11px;
+}
 
-      text-transform: uppercase;
-
-      letter-spacing: 1.5px;
-
-      color: #888;
-
-      font-weight: 800;
-    }
-
-
-    .conversation h2 {
-
-      margin:
-        12px 0 0;
-
-      font-size:
-        clamp(30px, 5vw, 48px);
-
-      letter-spacing:
-        -2px;
-
-      line-height: 1.08;
-    }
-
-
-    .conversation p {
-
-      margin:
-        20px auto 0;
-
-      max-width: 680px;
-
-      color: #666;
-
-      font-size: 16px;
-
-      line-height: 1.8;
-    }
-
-
-    /* =========================
-       PRODUCT SECTION
-    ========================= */
-
-    .products-section {
-
-      max-width: 1320px;
-
-      margin: auto;
-
-      padding:
-        25px 28px
-        90px;
-    }
-
-
-    .section-header {
-
-      display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        flex-end;
-
-      gap: 20px;
-
-      margin-bottom: 25px;
-    }
-
-
-    .section-label {
-
-      color: #888;
-
-      font-size: 11px;
-
-      font-weight: 800;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        1.4px;
-    }
-
-
-    .section-header h2 {
-
-      margin:
-        7px 0 0;
-
-      font-size: 32px;
-
-      letter-spacing:
-        -1.5px;
-    }
-
-
-    .section-right {
-
-      color: #888;
-
-      font-size: 12px;
-
-      text-align: right;
-    }
-
-
-    /* =========================
-       SEARCH
-    ========================= */
-
-    .controls {
-
-      display: flex;
-
-      gap: 10px;
-
-      margin-bottom: 25px;
-    }
-
-
-    .search {
-
-      flex: 1;
-
-      border:
-        1px solid #dddddd;
-
-      border-radius: 12px;
-
-      padding:
-        13px 15px;
-
-      outline: none;
-
-      background: #fff;
-
-      font-size: 13px;
-    }
-
-
-    .search:focus {
-
-      border-color: #111;
-
-      box-shadow:
-        0 0 0 3px
-        rgba(0,0,0,.05);
-    }
-
-
-    /* =========================
-       PRODUCT GRID
-    ========================= */
-
-    .grid {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, minmax(0,1fr));
-
-      gap: 22px;
-    }
-
-
-    .card {
-
-      position: relative;
-
-      overflow: hidden;
-
-      background: #fff;
-
-      border:
-        1px solid #eeeeee;
-
-      border-radius: 18px;
-
-      transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-    }
-
-
-    .card:hover {
-
-      transform:
-        translateY(-7px);
-
-      box-shadow:
-        0 22px 55px
-        rgba(0,0,0,.11);
-    }
-
-
-    .image-wrap {
-
-      position: relative;
-
-      aspect-ratio: 1 / 1;
-
-      background: #f5f5f5;
-
-      overflow: hidden;
-    }
-
-
-    .image-wrap img {
-
-      width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
-
-      display: block;
-
-      transition:
-        transform .55s ease;
-    }
-
-
-    .card:hover
-    .image-wrap img {
-
-      transform:
-        scale(1.055);
-    }
-
-
-    .badge {
-
-      position: absolute;
-
-      left: 12px;
-
-      top: 12px;
-
-      padding:
-        7px 10px;
-
-      border-radius: 20px;
-
-      background:
-        rgba(255,255,255,.94);
-
-      font-size: 10px;
-
-      font-weight: 900;
-
-      letter-spacing:
-        .7px;
-    }
-
-
-    .card-content {
-
-      padding: 18px;
-    }
-
-
-    .product-title {
-
-      font-size: 14px;
-
-      font-weight: 800;
-
-      line-height: 1.45;
-
-      min-height: 41px;
-    }
-
-
-    .conversation-line {
-
-      margin-top: 8px;
-
-      color: #777;
-
-      font-size: 12px;
-
-      line-height: 1.55;
-
-      min-height: 38px;
-    }
-
-
-    .price {
-
-      margin-top: 15px;
-
-      font-size: 21px;
-
-      font-weight: 850;
-
-      letter-spacing:
-        -.5px;
-    }
-
-
-    .price-note {
-
-      margin-top: 3px;
-
-      color: #999;
-
-      font-size: 10px;
-    }
-
-
-    .shop-btn {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      width: 100%;
-
-      min-height: 43px;
-
-      margin-top: 15px;
-
-      border-radius: 10px;
-
-      background: #111;
-
-      color: #fff;
-
-      text-decoration: none;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      transition:
-        background .2s ease,
-        transform .2s ease;
-    }
-
-
-    .shop-btn:hover {
-
-      background: #292929;
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    .shop-subtext {
-
-      text-align: center;
-
-      margin-top: 8px;
-
-      color: #999;
-
-      font-size: 9px;
-    }
-
-
-    /* =========================
-       NO PRODUCTS
-    ========================= */
-
-    .empty {
-
-      grid-column:
-        1 / -1;
-
-      padding:
-        80px 20px;
-
-      text-align: center;
-
-      color: #777;
-    }
-
-
-    /* =========================
-       STORY SECTION
-    ========================= */
-
-    .story {
-
-      background: #f7f7f7;
-
-      padding:
-        90px 25px;
-    }
-
-
-    .story-inner {
-
-      max-width: 1050px;
-
-      margin: auto;
-
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 70px;
-
-      align-items: center;
-    }
-
-
-    .story-label {
-
-      color: #888;
-
-      font-size: 11px;
-
-      font-weight: 800;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        1.4px;
-    }
-
-
-    .story h2 {
-
-      margin:
-        12px 0;
-
-      font-size:
-        clamp(31px, 5vw, 51px);
-
-      line-height:
-        1.05;
-
-      letter-spacing:
-        -2.5px;
-    }
-
-
-    .story p {
-
-      color: #666;
-
-      font-size: 15px;
-
-      line-height: 1.8;
-    }
-
-
-    .story-card {
-
-      background: #fff;
-
-      border:
-        1px solid #e9e9e9;
-
-      border-radius: 22px;
-
-      padding: 30px;
-
-      box-shadow:
-        0 20px 55px
-        rgba(0,0,0,.06);
-    }
-
-
-    .story-card-title {
-
-      font-weight: 850;
-
-      font-size: 18px;
-    }
-
-
-    .story-card p {
-
-      margin:
-        12px 0 0;
-
-      font-size: 13px;
-    }
-
-
-    .story-points {
-
-      margin-top: 22px;
-
-      display: grid;
-
-      gap: 13px;
-    }
-
-
-    .story-point {
-
-      display: flex;
-
-      gap: 11px;
-
-      align-items: flex-start;
-
-      font-size: 12px;
-
-      color: #555;
-    }
-
-
-    .check {
-
-      flex: 0 0 auto;
-
-      width: 21px;
-
-      height: 21px;
-
-      border-radius: 50%;
-
-      background: #111;
-
-      color: #fff;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      font-size: 10px;
-    }
-
-
-    /* =========================
-       HOW IT WORKS
-    ========================= */
-
-    .how {
-
-      max-width: 1100px;
-
-      margin: auto;
-
-      padding:
-        90px 25px;
-    }
-
-
-    .how-heading {
-
-      text-align: center;
-
-      margin-bottom: 40px;
-    }
-
-
-    .how-heading h2 {
-
-      margin:
-        8px 0 0;
-
-      font-size: 38px;
-
-      letter-spacing:
-        -1.7px;
-    }
-
-
-    .steps {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3,1fr);
-
-      gap: 18px;
-    }
-
-
-    .step {
-
-      padding: 25px;
-
-      border:
-        1px solid #eeeeee;
-
-      border-radius: 18px;
-
-      background: #fff;
-    }
-
-
-    .step-number {
-
-      font-size: 12px;
-
-      font-weight: 900;
-
-      color: #999;
-    }
-
-
-    .step h3 {
-
-      margin:
-        13px 0 8px;
-
-      font-size: 17px;
-    }
-
-
-    .step p {
-
-      margin: 0;
-
-      color: #777;
-
-      font-size: 12px;
-
-      line-height: 1.65;
-    }
-
-
-    /* =========================
-       FINAL CTA
-    ========================= */
-
-    .final-cta {
-
-      padding:
-        90px 25px;
-
-      text-align: center;
-
-      background: #111;
-
-      color: #fff;
-    }
-
-
-    .final-cta h2 {
-
-      max-width: 720px;
-
-      margin: auto;
-
-      font-size:
-        clamp(32px, 5vw, 55px);
-
-      line-height:
-        1.05;
-
-      letter-spacing:
-        -2.5px;
-    }
-
-
-    .final-cta p {
-
-      max-width: 570px;
-
-      margin:
-        20px auto 0;
-
-      color: #bbb;
-
-      font-size: 14px;
-
-      line-height: 1.7;
-    }
-
-
-    .final-cta a {
-
-      display: inline-flex;
-
-      margin-top: 28px;
-
-      padding:
-        14px 24px;
-
-      border-radius: 10px;
-
-      background: #fff;
-
-      color: #111;
-
-      text-decoration: none;
-
-      font-size: 12px;
-
-      font-weight: 850;
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-
-      background: #111;
-
-      color: #888;
-
-      text-align: center;
-
-      padding:
-        0 20px
-        35px;
-
-      font-size: 11px;
-    }
-
-
-    .footer-brand {
-
-      color: #fff;
-
-      font-weight: 800;
-
-      margin-bottom: 8px;
-    }
-
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width:1050px) {
-
-      .grid {
-        grid-template-columns:
-          repeat(3,minmax(0,1fr));
-      }
-
-      .nav-center {
-        display: none;
-      }
-
-    }
-
-
-    @media(max-width:750px) {
-
-      .hero {
-        padding:
-          70px 20px
-          70px;
-      }
-
-      .hero h1 {
-        letter-spacing:
-          -2.5px;
-      }
-
-      .trust-inner {
-        grid-template-columns:
-          1fr;
-      }
-
-      .trust-item {
-        border-right: 0;
-
-        border-bottom:
-          1px solid #eee;
-      }
-
-      .trust-item:last-child {
-        border-bottom: 0;
-      }
-
-      .products-section {
-        padding:
-          20px 15px
-          65px;
-      }
-
-      .grid {
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap: 12px;
-      }
-
-      .story-inner {
-        grid-template-columns:
-          1fr;
-
-        gap: 35px;
-      }
-
-      .steps {
-        grid-template-columns:
-          1fr;
-      }
-
-      .section-header {
-        align-items:
-          flex-start;
-
-        flex-direction:
-          column;
-      }
-
-      .section-right {
-        text-align: left;
-      }
-
-    }
-
-
-    @media(max-width:480px) {
-
-      .nav {
-        padding:
-          0 15px;
-      }
-
-      .brand {
-        font-size: 20px;
-      }
-
-      .currency-select {
-        max-width: 120px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .hero-text {
-        font-size: 15px;
-      }
-
-      .grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .conversation {
-        padding:
-          70px 20px
-          40px;
-      }
-
-      .story {
-        padding:
-          70px 20px;
-      }
-
-    }
-
-  </style>
-
+</style>
 </head>
 
 
 <body>
 
 
-  <!-- =========================
-       TOP NOTICE
-  ========================== -->
+<!-- =========================
+     HEADER
+========================= -->
 
-  <div class="top-notice">
+<header>
 
-    Thoughtfully selected products.
-    No pressure — just discover what feels right for you.
+  <div class="logo">
+    STYLE OF LIFE
+  </div>
+
+  <div class="header-right">
+
+    <select
+      id="currency"
+      class="currency"
+    >
+
+      <option value="USD">
+        🇺🇸 USD $
+      </option>
+
+      <option value="INR">
+        🇮🇳 INR ₹
+      </option>
+
+      <option value="GBP">
+        🇬🇧 GBP £
+      </option>
+
+      <option value="EUR">
+        🇪🇺 EUR €
+      </option>
+
+      <option value="CAD">
+        🇨🇦 CAD $
+      </option>
+
+      <option value="AUD">
+        🇦🇺 AUD $
+      </option>
+
+    </select>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <h1>
+    Find Something You Like.
+  </h1>
+
+  <p>
+    Simple choices. Products worth seeing.
+  </p>
+
+</section>
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<div class="search-box">
+
+  <input
+    id="search"
+    type="search"
+    placeholder="Search products..."
+  >
+
+</div>
+
+
+<!-- =========================
+     AI PRODUCT SECTION
+========================= -->
+
+<section class="ai-section">
+
+  <div class="ai-heading">
+    ❤️ Like this?
+  </div>
+
+
+  <!-- FEATURED PRODUCT -->
+
+  <div id="featuredProduct">
+
+    <div class="message">
+      Loading...
+    </div>
 
   </div>
 
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- AI MESSAGE -->
 
-  <header>
-
-    <div class="nav">
-
-      <a
-        href="#top"
-        class="brand"
-      >
-        Style Of Life
-      </a>
+  <div
+    id="aiMessage"
+    class="ai-message"
+  ></div>
 
 
-      <nav class="nav-center">
+  <!-- RECOMMENDATIONS -->
 
-        <a href="#products">
-          Discover
-        </a>
+  <div
+    id="recommendation"
+    class="recommendation"
+  >
 
-        <a href="#story">
-          Our Approach
-        </a>
+    <div class="recommendation-title">
+      You may like this ❤️
+    </div>
 
-        <a href="#how">
-          How It Works
-        </a>
+    <div
+      id="recommendationGrid"
+      class="recommendation-grid"
+    ></div>
 
-      </nav>
+  </div>
+
+</section>
 
 
-      <div class="nav-right">
+<!-- =========================
+     TRUST
+========================= -->
 
-        <select
-          id="currencySelect"
-          class="currency-select"
-          aria-label="Currency"
-        >
-          <option value="INR">
-            🇮🇳 INR ₹
-          </option>
-          
-          <option value="USD">
-            🇺🇸 USD $
-          </option>
+<section class="trust-section">
 
-          <option value="GBP">
-            🇬🇧 GBP £
-          </option>
+  <div class="trust-grid">
 
-          <option value="EUR">
-            🇪🇺 EUR €
-          </option>
+    <div class="trust-item">
 
-          <option value="CAD">
-            🇨🇦 CAD $
-          </option>
+      <strong>
+        Carefully Selected
+      </strong>
 
-          <option value="AUD">
-            🇦🇺 AUD $
-          </option>
-
-        </select>
-
-      </div>
+      <span>
+        Products worth a closer look.
+      </span>
 
     </div>
 
-  </header>
+
+    <div class="trust-item">
+
+      <strong>
+        Simple Shopping
+      </strong>
+
+      <span>
+        Easy links to the retailer.
+      </span>
+
+    </div>
 
 
-  <main id="top">
+    <div class="trust-item">
+
+      <strong>
+        Your Choice
+      </strong>
+
+      <span>
+        You decide what feels right.
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+<!-- =========================
+     ALL PRODUCTS
+========================= -->
 
-    <section class="hero">
+<section class="all-products">
 
-      <div class="hero-inner">
+  <div class="section-title">
+    More Products
+  </div>
 
-        <div class="eyebrow">
+  <div
+    id="allProducts"
+    class="all-grid"
+  ></div>
 
-          <span class="eyebrow-dot"></span>
-
-          A more thoughtful way to shop
-
-        </div>
-
-
-        <h1>
-
-          Maybe you'll find
-          <span>something you didn't know you needed.</span>
-
-        </h1>
+</section>
 
 
-        <p class="hero-text">
+<!-- =========================
+     FOOTER
+========================= -->
 
-          We bring together products worth taking a closer look at —
-          so instead of endlessly searching, you can simply explore,
-          compare, and choose what feels right for you.
+<footer>
 
-        </p>
+  <strong>
+    Style Of Life
+  </strong>
 
+  <br><br>
 
-        <div class="hero-actions">
+  Discover something you like.
 
-          <a
-            href="#products"
-            class="primary-btn"
-          >
-            Let Me Take a Look
-          </a>
+</footer>
 
 
-          <a
-            href="#story"
-            class="secondary-btn"
-          >
-            Why Style Of Life?
-          </a>
+<script>
 
-        </div>
+/* ========================================
+   PRODUCT DATA
+======================================== */
 
+let products = [];
+
+let currentProductIndex = 0;
+
+
+/* ========================================
+   CURRENCY
+======================================== */
+
+let selectedCurrency =
+  localStorage.getItem(
+    "styleOfLifeCurrency"
+  ) || "USD";
+
+
+const currencySelect =
+  document.getElementById(
+    "currency"
+  );
+
+
+currencySelect.value =
+  selectedCurrency;
+
+
+/*
+  These are approximate conversion rates.
+
+  USD = 1
+  INR = 89
+  GBP = 0.75
+  EUR = 0.86
+  CAD = 1.38
+  AUD = 1.53
+*/
+
+const rates = {
+
+  USD:1,
+
+  INR:89,
+
+  GBP:0.75,
+
+  EUR:0.86,
+
+  CAD:1.38,
+
+  AUD:1.53
+
+};
+
+
+const symbols = {
+
+  USD:"$",
+
+  INR:"₹",
+
+  GBP:"£",
+
+  EUR:"€",
+
+  CAD:"$",
+
+  AUD:"$"
+
+};
+
+
+/* ========================================
+   CHANGE CURRENCY
+======================================== */
+
+currencySelect.addEventListener(
+  "change",
+  function(){
+
+    selectedCurrency =
+      this.value;
+
+    localStorage.setItem(
+      "styleOfLifeCurrency",
+      selectedCurrency
+    );
+
+    showFeaturedProduct();
+
+    showAllProducts();
+
+    if(
+      document
+        .getElementById(
+          "recommendation"
+        )
+        .style.display === "block"
+    ){
+
+      showRecommendations();
+
+    }
+
+  }
+);
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(value){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* ========================================
+   GET PRICE
+======================================== */
+
+function getPrice(
+  product
+){
+
+  const rawPrice =
+    String(
+      product.price || ""
+    )
+    .replace(
+      /[^0-9.]/g,
+      ""
+    );
+
+
+  const price =
+    parseFloat(
+      rawPrice
+    );
+
+
+  if(
+    !price ||
+    isNaN(price)
+  ){
+
+    return "";
+
+  }
+
+
+  const productCurrency =
+    String(
+      product.currency || "USD"
+    )
+    .toUpperCase();
+
+
+  let usdPrice;
+
+
+  if(
+    productCurrency === "USD"
+  ){
+
+    usdPrice =
+      price;
+
+  }else{
+
+    usdPrice =
+      price /
+      (
+        rates[
+          productCurrency
+        ] || 1
+      );
+
+  }
+
+
+  const converted =
+    usdPrice *
+    (
+      rates[
+        selectedCurrency
+      ] || 1
+    );
+
+
+  return (
+    symbols[
+      selectedCurrency
+    ] || "$"
+  ) +
+  converted.toFixed(2);
+
+}
+
+
+/* ========================================
+   GET ACTIVE PRODUCTS
+======================================== */
+
+function getActiveProducts(){
+
+  return products.filter(
+    product =>
+      product &&
+      product.active !== false &&
+      product.image &&
+      product.link
+  );
+
+}
+
+
+/* ========================================
+   SHOW FEATURED PRODUCT
+======================================== */
+
+function showFeaturedProduct(){
+
+  const container =
+    document.getElementById(
+      "featuredProduct"
+    );
+
+
+  if(
+    !products.length
+  ){
+
+    container.innerHTML =
+      `
+      <div class="message">
+        No products available.
       </div>
+      `;
 
-    </section>
+    return;
+
+  }
 
 
-    <!-- =========================
-         TRUST
-    ========================== -->
+  if(
+    currentProductIndex >=
+    products.length
+  ){
 
-    <section class="trust-strip">
+    currentProductIndex = 0;
 
-      <div class="trust-inner">
+  }
 
-        <div class="trust-item">
 
-          <div class="trust-icon">
-            ✦
-          </div>
+  const product =
+    products[
+      currentProductIndex
+    ];
 
-          <div class="trust-title">
-            Thoughtfully Selected
-          </div>
 
-          <div class="trust-text">
-            Products chosen with purpose.
-          </div>
+  const price =
+    getPrice(
+      product
+    );
 
+
+  container.innerHTML = `
+
+    <div class="featured-product">
+
+      <div class="featured-image">
+
+        <div class="like-badge">
+          ❤️ Like this?
         </div>
 
-
-        <div class="trust-item">
-
-          <div class="trust-icon">
-            ↗
-          </div>
-
-          <div class="trust-title">
-            Shop With Confidence
-          </div>
-
-          <div class="trust-text">
-            Purchase is completed on the retailer's website.
-          </div>
-
-        </div>
-
-
-        <div class="trust-item">
-
-          <div class="trust-icon">
-            ♡
-          </div>
-
-          <div class="trust-title">
-            Your Choice, Your Style
-          </div>
-
-          <div class="trust-text">
-            No pressure. Take your time.
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONVERSATION
-    ========================== -->
-
-    <section class="conversation">
-
-      <div class="conversation-label">
-        Let's be honest
-      </div>
-
-
-      <h2>
-        You don't need more things.
-        You need the right thing.
-      </h2>
-
-
-      <p>
-
-        That's why we're not trying to put everything in front of you.
-        We want you to find something that actually makes you stop,
-        look twice, and think,
-        <strong>"Yes, that's exactly what I was looking for."</strong>
-
-      </p>
-
-    </section>
-
-
-    <!-- =========================
-         PRODUCTS
-    ========================== -->
-
-    <section
-      class="products-section"
-      id="products"
-    >
-
-      <div class="section-header">
-
-        <div>
-
-          <div class="section-label">
-            Just for you
-          </div>
-
-          <h2>
-            Take a look around.
-          </h2>
-
-        </div>
-
-
-        <div
-          class="section-right"
-          id="productCount"
+        <img
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.title)}"
+          onerror="imageError(this)"
         >
-          Finding products you'll love...
-        </div>
 
       </div>
 
 
-      <div class="controls">
-
-        <input
-          id="searchInput"
-          class="search"
-          type="search"
-          placeholder="What are you looking for?"
-          autocomplete="off"
-        >
-
-      </div>
-
-
-      <div
-        id="productGrid"
-        class="grid"
-      >
-
-        <div class="empty">
-
-          Give us a moment...
-          <br>
-          We're finding the products.
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         STORY
-    ========================== -->
-
-    <section
-      class="story"
-      id="story"
-    >
-
-      <div class="story-inner">
-
-        <div>
-
-          <div class="story-label">
-            Our approach
-          </div>
-
-
-          <h2>
-            Shopping should feel simple.
-          </h2>
-
-
-          <p>
-
-            There are already thousands of products online.
-            You don't need another website shouting
-            "BUY NOW!"
-
-          </p>
-
-
-          <p>
-
-            We'd rather give you a calmer place to discover
-            interesting products and make your own decision.
-
-          </p>
-
-        </div>
-
-
-        <div class="story-card">
-
-          <div class="story-card-title">
-
-            What matters to us
-
-          </div>
-
-
-          <p>
-
-            A good shopping experience should leave you feeling
-            comfortable with your choice — not pressured into it.
-
-          </p>
-
-
-          <div class="story-points">
-
-            <div class="story-point">
-
-              <span class="check">✓</span>
-
-              <span>
-                Clear product information whenever available.
-              </span>
-
-            </div>
-
-
-            <div class="story-point">
-
-              <span class="check">✓</span>
-
-              <span>
-                Simple links that take you directly to the retailer.
-              </span>
-
-            </div>
-
-
-            <div class="story-point">
-
-              <span class="check">✓</span>
-
-              <span>
-                No fake reviews or made-up customer claims.
-              </span>
-
-            </div>
-
-
-            <div class="story-point">
-
-              <span class="check">✓</span>
-
-              <span>
-                You stay in control of the final purchase decision.
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         HOW IT WORKS
-    ========================== -->
-
-    <section
-      class="how"
-      id="how"
-    >
-
-      <div class="how-heading">
-
-        <div class="section-label">
-          Simple by design
-        </div>
+      <div class="featured-info">
 
         <h2>
-          See it. Like it. Decide.
+          ${escapeHTML(product.title)}
         </h2>
 
-      </div>
 
-
-      <div class="steps">
-
-        <div class="step">
-
-          <div class="step-number">
-            01 — DISCOVER
+        ${
+          price
+          ?
+          `
+          <div class="featured-price">
+            ${price}
           </div>
-
-          <h3>
-            Find something interesting.
-          </h3>
-
-          <p>
-            Browse the collection and take your time.
-            There's no rush.
-          </p>
-
-        </div>
-
-
-        <div class="step">
-
-          <div class="step-number">
-            02 — EXPLORE
-          </div>
-
-          <h3>
-            Look at the details.
-          </h3>
-
-          <p>
-            Read the information, check the product,
-            and decide whether it fits what you want.
-          </p>
-
-        </div>
-
-
-        <div class="step">
-
-          <div class="step-number">
-            03 — CHOOSE
-          </div>
-
-          <h3>
-            Shop when you're ready.
-          </h3>
-
-          <p>
-            Click Shop Now and you'll be taken to the
-            retailer's website to complete your purchase.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         FINAL CTA
-    ========================== -->
-
-    <section class="final-cta">
-
-      <h2>
-        Maybe your next favorite thing is already here.
-      </h2>
-
-
-      <p>
-
-        Have a look around.
-        If something feels right, go for it.
-        If not, that's okay too.
-
-      </p>
-
-
-      <a href="#products">
-        Explore the Collection
-      </a>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <div class="footer-brand">
-      Style Of Life
-    </div>
-
-    <div>
-      Discover products. Make your own choice.
-    </div>
-
-  </footer>
-
-
-  <script>
-
-
-    /* ==========================================
-       PRODUCT DATA
-    ========================================== */
-
-    const PRODUCTS_URL =
-      "./products.json";
-
-
-    /* ==========================================
-       CURRENCY
-    ========================================== */
-
-    const currencySelect =
-      document.getElementById(
-        "currencySelect"
-      );
-
-
-    const rates = {
-
-      USD: 1,
-
-      INR: 89.0,
-
-      GBP: 0.75,
-
-      EUR: 0.86,
-
-      CAD: 1.38,
-
-      AUD: 1.53
-
-    };
-
-
-    const currencyInfo = {
-
-      USD: {
-        symbol: "$",
-        decimals: 2
-      },
-
-      INR: {
-        symbol: "₹",
-        decimals: 0
-      },
-
-      GBP: {
-        symbol: "£",
-        decimals: 2
-      },
-
-      EUR: {
-        symbol: "€",
-        decimals: 2
-      },
-
-      CAD: {
-        symbol: "CA$",
-        decimals: 2
-      },
-
-      AUD: {
-        symbol: "A$",
-        decimals: 2
-      }
-
-    };
-
-
-    /* ==========================================
-       ELEMENTS
-    ========================================== */
-
-    const productGrid =
-      document.getElementById(
-        "productGrid"
-      );
-
-
-    const productCount =
-      document.getElementById(
-        "productCount"
-      );
-
-
-    const searchInput =
-      document.getElementById(
-        "searchInput"
-      );
-
-
-    let allProducts = [];
-
-
-    /* ==========================================
-       ESCAPE HTML
-    ========================================== */
-
-    function esc(value) {
-
-      return String(
-        value ?? ""
-      ).replace(
-        /[&<>"']/g,
-        c => ({
-
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-
-        }[c])
-      );
-
-    }
-
-
-    /* ==========================================
-       PRICE CONVERSION
-    ========================================== */
-
-    function convertPrice(
-      price,
-      fromCurrency,
-      toCurrency
-    ) {
-
-      const number =
-        Number(
-          String(price)
-            .replace(
-              /[^0-9.-]/g,
-              ""
-            )
-        );
-
-
-      if (
-        !Number.isFinite(number)
-      ) {
-
-        return null;
-
-      }
-
-
-      const from =
-        rates[
-          fromCurrency
-        ] || 1;
-
-
-      const to =
-        rates[
-          toCurrency
-        ] || 1;
-
-
-      const usdValue =
-        number / from;
-
-
-      return usdValue * to;
-
-    }
-
-
-    /* ==========================================
-       FORMAT PRICE
-    ========================================== */
-
-    function formatPrice(
-      price,
-      fromCurrency
-    ) {
-
-      const target =
-        currencySelect.value;
-
-
-      const converted =
-        convertPrice(
-          price,
-          fromCurrency || "USD",
-          target
-        );
-
-
-      if (
-        converted === null
-      ) {
-
-        return "Price unavailable";
-
-      }
-
-
-      const info =
-        currencyInfo[
-          target
-        ];
-
-
-      return (
-        info.symbol +
-        converted.toLocaleString(
-          "en-US",
-          {
-            minimumFractionDigits:
-              info.decimals,
-
-            maximumFractionDigits:
-              info.decimals
-          }
-        )
-      );
-
-    }
-
-
-    /* ==========================================
-       CONVERSATIONAL PRODUCT COPY
-    ========================================== */
-
-    function getConversation(
-      product,
-      index
-    ) {
-
-      if (
-        product.description &&
-        product.description.trim()
-      ) {
-
-        const clean =
-          product.description
-            .replace(
-              /\s+/g,
-              " "
-            )
-            .trim();
-
-
-        if (
-          clean.length <= 125
-        ) {
-
-          return clean;
-
+          `
+          :
+          ""
         }
 
 
-        return (
-          clean.substring(
-            0,
-            122
-          ) +
-          "..."
-        );
+        <div class="choice-buttons">
 
-      }
-
-
-      const messages = [
-
-        "This one caught our eye — have a closer look.",
-
-        "If this feels like your style, it's worth exploring.",
-
-        "Simple, useful, and easy to imagine in everyday life.",
-
-        "Sometimes the right choice is the one you notice first.",
-
-        "Take a closer look and see if it's right for you."
-
-      ];
+          <button
+            class="yes-button"
+            onclick="likeProduct()"
+          >
+            ❤️ Yes
+          </button>
 
 
-      return messages[
-        index %
-        messages.length
-      ];
+          <button
+            onclick="skipProduct()"
+          >
+            Not for me
+          </button>
 
-    }
-
-
-    /* ==========================================
-       RENDER PRODUCTS
-    ========================================== */
-
-    function renderProducts(
-      products
-    ) {
-
-      productGrid.innerHTML = "";
+        </div>
 
 
-      const search =
-        searchInput.value
-          .trim()
-          .toLowerCase();
+        <a
+          class="view-product"
+          href="${escapeHTML(product.link)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Product →
+        </a>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
 
 
-      const activeProducts =
-        products.filter(
-          product => {
+/* ========================================
+   IMAGE ERROR
+======================================== */
 
-            if (
-              !product ||
-              product.active === false
-            ) {
+function imageError(
+  image
+){
 
-              return false;
+  image.style.display =
+    "none";
 
-            }
-
-
-            if (!search) {
-
-              return true;
-
-            }
+}
 
 
-            const searchable = [
+/* ========================================
+   LIKE PRODUCT
+======================================== */
 
-              product.title,
+function likeProduct(){
 
-              product.description
+  const product =
+    products[
+      currentProductIndex
+    ];
 
-            ]
-              .join(" ")
-              .toLowerCase();
+
+  localStorage.setItem(
+    "likedProduct",
+    product.title
+  );
 
 
-            return searchable.includes(
-              search
+  document.getElementById(
+    "aiMessage"
+  ).innerHTML =
+    "Finding something you may like ❤️";
+
+
+  setTimeout(
+    function(){
+
+      showRecommendations();
+
+    },
+    400
+  );
+
+}
+
+
+/* ========================================
+   SKIP PRODUCT
+======================================== */
+
+function skipProduct(){
+
+  currentProductIndex++;
+
+  if(
+    currentProductIndex >=
+    products.length
+  ){
+
+    currentProductIndex = 0;
+
+  }
+
+
+  document.getElementById(
+    "aiMessage"
+  ).innerHTML =
+    "";
+
+
+  document.getElementById(
+    "recommendation"
+  ).style.display =
+    "none";
+
+
+  showFeaturedProduct();
+
+}
+
+
+/* ========================================
+   SHOW RECOMMENDATIONS
+======================================== */
+
+function showRecommendations(){
+
+  const recommendation =
+    document.getElementById(
+      "recommendation"
+    );
+
+
+  const grid =
+    document.getElementById(
+      "recommendationGrid"
+    );
+
+
+  const recommendedProducts =
+    products
+      .filter(
+        (
+          product,
+          index
+        ) =>
+          product.active !== false &&
+          index !==
+          currentProductIndex &&
+          product.image &&
+          product.link
+      )
+      .slice(
+        0,
+        4
+      );
+
+
+  if(
+    !recommendedProducts.length
+  ){
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    recommendedProducts
+      .map(
+        product => {
+
+          const price =
+            getPrice(
+              product
             );
 
-          }
-        );
 
+          return `
 
-      productCount.textContent =
+            <div class="product-card">
 
-        activeProducts.length === 1
-
-          ? "1 product to explore"
-
-          :
-
-          activeProducts.length +
-          " products to explore";
-
-
-      if (
-        !activeProducts.length
-      ) {
-
-        productGrid.innerHTML = `
-
-          <div class="empty">
-
-            <strong>
-              We couldn't find that one.
-            </strong>
-
-            <br><br>
-
-            Try another search —
-            you might discover something unexpected.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      activeProducts.forEach(
-        (product, index) => {
-
-          const card =
-            document.createElement(
-              "article"
-            );
-
-
-          card.className =
-            "card";
-
-
-          const image =
-            product.image
-
-              ?
-
-              `
+              <div class="product-image">
 
                 <img
-                  src="${esc(product.image)}"
-                  alt="${esc(product.title)}"
-                  loading="lazy"
-                  onerror="this.style.display='none'"
+                  src="${escapeHTML(product.image)}"
+                  alt="${escapeHTML(product.title)}"
+                  onerror="imageError(this)"
                 >
 
-              `
+              </div>
 
-              :
 
-              `
+              <div class="product-info">
 
-                <div
-                  style="
-                    width:100%;
-                    height:100%;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    color:#999;
-                    font-size:12px;
-                  "
+                <h3>
+                  ${escapeHTML(product.title)}
+                </h3>
+
+
+                ${
+                  price
+                  ?
+                  `
+                  <div class="product-price">
+                    ${price}
+                  </div>
+                  `
+                  :
+                  ""
+                }
+
+
+                <a
+                  class="card-button"
+                  href="${escapeHTML(product.link)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Product image
-                </div>
-
-              `;
-
-
-          const badge =
-            index < 3
-
-              ?
-
-              `<div class="badge">
-                WORTH A LOOK
-              </div>`
-
-              :
-
-              "";
-
-
-          const conversation =
-            getConversation(
-              product,
-              index
-            );
-
-
-          card.innerHTML = `
-
-            <div class="image-wrap">
-
-              ${image}
-
-              ${badge}
-
-            </div>
-
-
-            <div class="card-content">
-
-              <div class="product-title">
-
-                ${esc(
-                  product.title
-                )}
-
-              </div>
-
-
-              <div class="conversation-line">
-
-                ${esc(
-                  conversation
-                )}
-
-              </div>
-
-
-              <div class="price">
-
-                ${formatPrice(
-                  product.price,
-                  product.currency ||
-                  "USD"
-                )}
-
-              </div>
-
-
-              <div class="price-note">
-
-                Displayed in
-                ${esc(
-                  currencySelect.value
-                )}
-
-              </div>
-
-
-              <a
-                class="shop-btn"
-                href="${esc(product.link)}"
-                target="_blank"
-                rel="nofollow sponsored noopener noreferrer"
-              >
-
-                Take a Closer Look
-                &nbsp; →
-
-              </a>
-
-
-              <div class="shop-subtext">
-
-                You'll complete your purchase
-                on the retailer's website.
+                  View Product →
+                </a>
 
               </div>
 
@@ -2486,138 +1439,283 @@
 
           `;
 
+        }
+      )
+      .join("");
 
-          productGrid.appendChild(
-            card
-          );
+
+  recommendation.style.display =
+    "block";
+
+
+  recommendation.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* ========================================
+   SHOW ALL PRODUCTS
+======================================== */
+
+function showAllProducts(
+  searchTerm = ""
+){
+
+  const container =
+    document.getElementById(
+      "allProducts"
+    );
+
+
+  const activeProducts =
+    getActiveProducts();
+
+
+  const filtered =
+    activeProducts.filter(
+      product => {
+
+        const title =
+          String(
+            product.title || ""
+          ).toLowerCase();
+
+
+        const description =
+          String(
+            product.description || ""
+          ).toLowerCase();
+
+
+        const search =
+          searchTerm
+            .toLowerCase()
+            .trim();
+
+
+        return (
+          !search ||
+          title.includes(search) ||
+          description.includes(search)
+        );
+
+      }
+    );
+
+
+  if(
+    !filtered.length
+  ){
+
+    container.innerHTML =
+      `
+      <div class="message">
+        No products found.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    filtered
+      .map(
+        product => {
+
+          const price =
+            getPrice(
+              product
+            );
+
+
+          return `
+
+            <div class="product-card">
+
+              <div class="product-image">
+
+                <img
+                  src="${escapeHTML(product.image)}"
+                  alt="${escapeHTML(product.title)}"
+                  onerror="imageError(this)"
+                >
+
+              </div>
+
+
+              <div class="product-info">
+
+                <h3>
+                  ${escapeHTML(product.title)}
+                </h3>
+
+
+                ${
+                  price
+                  ?
+                  `
+                  <div class="product-price">
+                    ${price}
+                  </div>
+                  `
+                  :
+                  ""
+                }
+
+
+                <a
+                  class="card-button"
+                  href="${escapeHTML(product.link)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Product →
+                </a>
+
+              </div>
+
+            </div>
+
+          `;
 
         }
+      )
+      .join("");
+
+}
+
+
+/* ========================================
+   SEARCH
+======================================== */
+
+document
+  .getElementById(
+    "search"
+  )
+  .addEventListener(
+    "input",
+    function(){
+
+      showAllProducts(
+        this.value
+      );
+
+    }
+  );
+
+
+/* ========================================
+   LOAD PRODUCTS
+======================================== */
+
+async function loadProducts(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./products.json?v=" +
+        Date.now()
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "products.json could not be loaded."
       );
 
     }
 
 
-    /* ==========================================
-       LOAD PRODUCTS
-    ========================================== */
-
-    async function loadProducts() {
-
-      try {
-
-        const response =
-          await fetch(
-            PRODUCTS_URL +
-            "?v=" +
-            Date.now()
-          );
+    const data =
+      await response.json();
 
 
-        if (
-          !response.ok
-        ) {
+    if(
+      !Array.isArray(data)
+    ){
 
-          throw new Error(
-            "Products could not be loaded."
-          );
-
-        }
-
-
-        const products =
-          await response.json();
-
-
-        if (
-          !Array.isArray(products)
-        ) {
-
-          throw new Error(
-            "Invalid product data."
-          );
-
-        }
-
-
-        allProducts =
-          products;
-
-
-        renderProducts(
-          allProducts
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        productGrid.innerHTML = `
-
-          <div class="empty">
-
-            <strong>
-              Something went wrong.
-            </strong>
-
-            <br><br>
-
-            Please check back in a little while.
-
-          </div>
-
-        `;
-
-      }
+      throw new Error(
+        "products.json is not an array."
+      );
 
     }
 
 
-    /* ==========================================
-       SEARCH
-    ========================================== */
+    products =
+      data.filter(
+        product =>
+          product &&
+          product.active !== false &&
+          product.image &&
+          product.link
+      );
 
-    searchInput.addEventListener(
-      "input",
-      () => {
 
-        renderProducts(
-          allProducts
-        );
+    if(
+      !products.length
+    ){
 
-      }
+      document.getElementById(
+        "featuredProduct"
+      ).innerHTML =
+        `
+        <div class="message">
+          Products coming soon.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    currentProductIndex = 0;
+
+
+    showFeaturedProduct();
+
+    showAllProducts();
+
+
+  }catch(error){
+
+    console.error(
+      error
     );
 
 
-    /* ==========================================
-       CURRENCY
-    ========================================== */
+    document.getElementById(
+      "featuredProduct"
+    ).innerHTML =
+      `
+      <div class="message">
+        Products are loading...
+      </div>
+      `;
 
-    currencySelect.addEventListener(
-      "change",
-      () => {
+  }
 
-        renderProducts(
-          allProducts
-        );
-
-      }
-    );
+}
 
 
-    /* ==========================================
-       START
-    ========================================== */
+/* ========================================
+   START
+======================================== */
 
-    loadProducts();
+loadProducts();
 
-
-  </script>
-
+</script>
 
 </body>
-
 </html>
+```
