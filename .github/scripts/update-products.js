@@ -1,9 +1,14 @@
 const fs = require("fs");
 
-const links = JSON.parse(fs.readFileSync("links.json", "utf8"));
-const urls = Array.isArray(links) ? links : (links.links || []);
+const links = JSON.parse(
+  fs.readFileSync("links.json", "utf8")
+);
 
-function decode(value) {
+const urls = Array.isArray(links)
+  ? links
+  : (links.links || []);
+
+function decodeHtml(value) {
   return String(value || "")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
@@ -13,29 +18,53 @@ function decode(value) {
 }
 
 function getMeta(html, key) {
-  const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const metaTags = html.match(/<meta\b[^>]*>/gi) || [];
 
-  const patterns = [
-    new RegExp(
-      '<meta[^>]+(?:property|name)=["\\']' +
-      escaped +
-      '["\\'][^>]+content=["\\']([^"\\']*)["\\'][^>]*>',
-      "i"
-    ),
-    new RegExp(
-      '<meta[^>]+content=["\\']([^"\\']*)["\\'][^>]+(?:property|name)=["\\']' +
-      escaped +
-      '["\\'][^>]*>',
-      "i"
-    )
-  ];
+  for (const tag of metaTags) {
+    const propertyMatch = tag.match(
+      /\b(?:property|name)\s*=\s*["']([^"']+)["']/i
+    );
 
-  for (const pattern of patterns) {
-    const match = html.match(pattern);
-    if (match) return decode(match[1]);
+    const contentMatch = tag.match(
+      /\bcontent\s*=\s*["']([^"']*)["']/i
+    );
+
+    if (
+      propertyMatch &&
+      contentMatch &&
+      propertyMatch[1].toLowerCase() === key.toLowerCase()
+    ) {
+      return decodeHtml(contentMatch[1]);
+    }
+
+    const contentFirstMatch = tag.match(
+      /\bcontent\s*=\s*["']([^"']*)["']/i
+    );
+
+    const propertySecondMatch = tag.match(
+      /\b(?:property|name)\s*=\s*["']([^"']+)["']/i
+    );
+
+    if (
+      contentFirstMatch &&
+      propertySecondMatch &&
+      propertySecondMatch[1].toLowerCase() === key.toLowerCase()
+    ) {
+      return decodeHtml(contentFirstMatch[1]);
+    }
   }
 
   return "";
+}
+
+function getTitleFromHtml(html) {
+  const match = html.match(
+    /<title[^>]*>([\s\S]*?)<\/title>/i
+  );
+
+  return match
+    ? decodeHtml(match[1].trim())
+    : "";
 }
 
 async function fetchProduct(url) {
@@ -49,16 +78,22 @@ async function fetchProduct(url) {
   };
 
   try {
+    console.log("Fetching:", url);
+
     const response = await fetch(url, {
       redirect: "follow",
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; StyleOfLifeProductFetcher/1.0)",
-        "Accept": "text/html,application/xhtml+xml"
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+        "Accept":
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
       }
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(
+        "HTTP " + response.status
+      );
     }
 
     const html = await response.text();
@@ -66,6 +101,7 @@ async function fetchProduct(url) {
     product.title =
       getMeta(html, "og:title") ||
       getMeta(html, "twitter:title") ||
+      getTitleFromHtml(html) ||
       "Amazon Product";
 
     product.image =
@@ -86,27 +122,87 @@ async function fetchProduct(url) {
       getMeta(html, "og:price:currency");
 
     if (price) {
-      product.price = currency ? `${currency} ${price}` : price;
+      product.price = currency
+        ? currency + " " + price
+        : price;
     }
+
+    console.log(
+      "Product found:",
+      product.title
+    );
+
   } catch (error) {
-    console.warn(`Could not fetch ${url}: ${error.message}`);
+    console.log(
+      "Could not fetch:",
+      url
+    );
+
+    console.log(
+      "Reason:",
+      error.message
+    );
+
+    /*
+      Even if Amazon blocks the request,
+      keep the original affiliate URL.
+    */
   }
 
   return product;
 }
 
-(async () => {
+async function main() {
   const products = [];
 
   for (const url of urls) {
-    if (!url || !/^https?:\/\//i.test(url)) continue;
-    products.push(await fetchProduct(url));
+
+    if (
+      !url ||
+      !/^https?:\/\//i.test(url)
+    ) {
+      console.log(
+        "Skipping invalid URL:",
+        url
+      );
+
+      continue;
+    }
+
+    const product =
+      await fetchProduct(url);
+
+    products.push(product);
   }
 
   fs.writeFileSync(
     "products.json",
-    JSON.stringify(products, null, 2) + "\n"
+    JSON.stringify(
+      products,
+      null,
+      2
+    ) + "\n"
   );
 
-  console.log(`Created products.json with ${products.length} products.`);
-})();
+  console.log(
+    "--------------------------------"
+  );
+
+  console.log(
+    "products.json created successfully"
+  );
+
+  console.log(
+    "Total products:",
+    products.length
+  );
+
+  console.log(
+    "--------------------------------"
+  );
+}
+
+main().catch(error => {
+  console.error(error);
+  process.exit(1);
+});
