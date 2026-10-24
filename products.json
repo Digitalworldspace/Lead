@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "title": "Amazon.in",
+    "price": "",
+    "image": "",
+    "description": "",
+    "link": "https://www.amazon.in/Lymio-Polo-Casual-T-Shirt-Polo-45-Pista-M/dp/B0DP7NRVCS?pd_rd_i=B0DP7NRVCS&pd_rd_w=iOfXn&content-id=amzn1.sym.90d8f273-40b2-444c-ade5-935f2cc286fa%3Aamzn1.symc.70414431-cb84-4353-b3a2-572da1d4b405&pf_rd_p=90d8f273-40b2-444c-ade5-935f2cc286fa&pf_rd_r=T5ZS4V50SPAAECBFY61C&pd_rd_wg=mhv1k&pd_rd_r=bdf4cfa4-9340-4f6b-b58f-f7a702967b18&linkCode=ll2&tag=styleoflife08-21&linkId=b631d82c940261a93190a5bc0fc174f3&ref_=as_li_ss_tl",
+    "active": true
+  }
+]
