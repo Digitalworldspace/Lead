@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Style Of Life - Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    .container {
+      width: min(700px, 92%);
+      margin: 50px auto;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 18px 0 8px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #111;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    #status {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .token-box {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    small {
+      color: #777;
+      display: block;
+      margin-top: 7px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h1>Style Of Life</h1>
+
+      <div class="subtitle">
+        Product Admin Portal
+      </div>
+
+      <label>Product Name</label>
+      <input
+        id="productName"
+        type="text"
+        placeholder="Enter product name"
+      >
+
+      <label>Amazon Affiliate Link</label>
+      <input
+        id="affiliateLink"
+        type="url"
+        placeholder="https://link.amazon/..."
+      >
+
+      <label>Photo URL</label>
+      <input
+        id="photoUrl"
+        type="url"
+        placeholder="https://..."
+      >
+
+      <label>Price</label>
+      <input
+        id="price"
+        type="text"
+        placeholder="$29.99"
+      >
+
+      <label>Description</label>
+      <textarea
+        id="description"
+        placeholder="Enter product description"
+      ></textarea>
+
+      <button onclick="addProduct()">
+        Add Product
+      </button>
+
+      <div id="status"></div>
+
+      <div class="token-box">
+
+        <label>GitHub Token</label>
+
+        <input
+          id="githubToken"
+          type="password"
+          placeholder="GitHub token"
+        >
+
+        <small>
+          Token is used only to update your GitHub repository.
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+
+const OWNER = "Digitalworldspace";
+const REPO = "Lead";
+const FILE = "products.json";
+const BRANCH = "main";
+
+
+function showStatus(message, type) {
+
+  const status = document.getElementById("status");
+
+  status.textContent = message;
+
+  status.className = type || "";
+
+}
+
+
+async function addProduct() {
+
+  const name =
+    document.getElementById("productName").value.trim();
+
+  const affiliate =
+    document.getElementById("affiliateLink").value.trim();
+
+  const photo =
+    document.getElementById("photoUrl").value.trim();
+
+  const price =
+    document.getElementById("price").value.trim();
+
+  const description =
+    document.getElementById("description").value.trim();
+
+  const token =
+    document.getElementById("githubToken").value.trim();
+
+
+  if (!name ||
+      !affiliate ||
+      !photo ||
+      !price ||
+      !description) {
+
+    showStatus(
+      "Please fill all 5 fields.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!token) {
+
+    showStatus(
+      "Please enter GitHub Token.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  try {
+
+    showStatus(
+      "Loading products...",
+      ""
+    );
+
+
+    const apiUrl =
+      `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}?ref=${BRANCH}`;
+
+
+    const getResponse =
+      await fetch(apiUrl, {
+
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json"
+        }
+
+      });
+
+
+    if (!getResponse.ok) {
+
+      throw new Error(
+        "Could not read products.json"
+      );
+
+    }
+
+
+    const fileData =
+      await getResponse.json();
+
+
+    const decoded =
+      decodeURIComponent(
+        escape(
+          atob(
+            fileData.content.replace(/\n/g, "")
+          )
+        )
+      );
+
+
+    let products = [];
+
+
+    try {
+
+      products = JSON.parse(decoded);
+
+    } catch {
+
+      products = [];
+
+    }
+
+
+    if (!Array.isArray(products)) {
+
+      products = [];
+
+    }
+
+
+    const newProduct = {
+
+      title: name,
+
+      price: price,
+
+      image: photo,
+
+      description: description,
+
+      link: affiliate,
+
+      active: true
+
+    };
+
+
+    products.push(newProduct);
+
+
+    const newContent =
+      JSON.stringify(
+        products,
+        null,
+        2
+      ) + "\n";
+
+
+    const encodedContent =
+      btoa(
+        unescape(
+          encodeURIComponent(
+            newContent
+          )
+        )
+      );
+
+
+    showStatus(
+      "Saving product to GitHub...",
+      ""
+    );
+
+
+    const updateResponse =
+      await fetch(apiUrl, {
+
+        method: "PUT",
+
+        headers: {
+
+          "Authorization":
+            `Bearer ${token}`,
+
+          "Accept":
+            "application/vnd.github+json",
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+          message:
+            `Add product: ${name}`,
+
+          content:
+            encodedContent,
+
+          sha:
+            fileData.sha,
+
+          branch:
+            BRANCH
+
+        })
+
+      });
+
+
+    if (!updateResponse.ok) {
+
+      const errorData =
+        await updateResponse.json();
+
+      throw new Error(
+        errorData.message ||
+        "GitHub update failed"
+      );
+
+    }
+
+
+    document.getElementById(
+      "productName"
+    ).value = "";
+
+    document.getElementById(
+      "affiliateLink"
+    ).value = "";
+
+    document.getElementById(
+      "photoUrl"
+    ).value = "";
+
+    document.getElementById(
+      "price"
+    ).value = "";
+
+    document.getElementById(
+      "description"
+    ).value = "";
+
+
+    showStatus(
+      "✅ Product added successfully!",
+      "success"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showStatus(
+      "❌ " + error.message,
+      "error"
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
