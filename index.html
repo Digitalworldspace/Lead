@@ -5,14 +5,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Style Of Life | Find Something You Like</title>
+<title>Style Of Life</title>
 
 <meta
   name="description"
-  content="Discover products you may love at Style Of Life."
+  content="Discover products you may like at Style Of Life."
 >
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
   margin:0;
@@ -25,58 +29,68 @@ html{
 }
 
 body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+
   font-family:
     Arial,
     Helvetica,
     sans-serif;
 
-  background:#ffffff;
-  color:#111111;
+  background:#fff;
+  color:#111;
 }
 
-/* =========================
+img{
+  max-width:100%;
+}
+
+
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header{
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:1000;
 
+  width:100%;
   height:70px;
-
-  background:rgba(255,255,255,.96);
-
-  backdrop-filter:blur(12px);
-
-  border-bottom:1px solid #eeeeee;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
   padding:0 6%;
+
+  background:rgba(255,255,255,.96);
+
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid #eee;
 }
 
 .logo{
   font-size:21px;
   font-weight:700;
   letter-spacing:1.5px;
+  white-space:nowrap;
 }
 
 .header-right{
   display:flex;
   align-items:center;
-  gap:12px;
 }
 
 .currency{
-  border:1px solid #dddddd;
-  background:#ffffff;
+  border:1px solid #ddd;
+  background:#fff;
 
   padding:9px 13px;
 
-  border-radius:20px;
+  border-radius:22px;
 
   font-size:13px;
 
@@ -85,14 +99,15 @@ header{
   cursor:pointer;
 }
 
-/* =========================
+
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
   text-align:center;
 
-  padding:55px 20px 30px;
+  padding:55px 20px 25px;
 }
 
 .hero h1{
@@ -105,31 +120,30 @@ header{
 }
 
 .hero p{
-  color:#777777;
-
+  color:#777;
   font-size:16px;
-
   line-height:1.5;
 }
 
-/* =========================
+
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
 
 .search-box{
+  width:100%;
   max-width:500px;
 
-  margin:20px auto 15px;
+  margin:15px auto 25px;
 
   padding:0 20px;
 }
 
 .search-box input{
   width:100%;
-
   height:48px;
 
-  border:1px solid #dddddd;
+  border:1px solid #ddd;
 
   border-radius:25px;
 
@@ -143,17 +157,19 @@ header{
 }
 
 .search-box input:focus{
-  border-color:#111111;
+  border-color:#111;
 }
 
-/* =========================
-   MAIN AI AREA
-========================= */
+
+/* =====================================================
+   MAIN AI SECTION
+===================================================== */
 
 .ai-section{
+  width:100%;
   max-width:900px;
 
-  margin:20px auto 80px;
+  margin:0 auto 75px;
 
   padding:0 20px;
 }
@@ -162,24 +178,25 @@ header{
   text-align:center;
 
   font-size:29px;
-
   font-weight:700;
 
   margin-bottom:25px;
 }
 
-/* =========================
+
+/* =====================================================
    FEATURED PRODUCT
-========================= */
+===================================================== */
 
 .featured-product{
+  width:100%;
   max-width:500px;
 
-  margin:auto;
+  margin:0 auto;
 
-  background:#ffffff;
+  background:#fff;
 
-  border:1px solid #eeeeee;
+  border:1px solid #eee;
 
   border-radius:25px;
 
@@ -196,11 +213,15 @@ header{
   transform:translateY(-3px);
 }
 
+
+/* =====================================================
+   FEATURED IMAGE
+===================================================== */
+
 .featured-image{
   position:relative;
 
   width:100%;
-
   height:430px;
 
   background:#fafafa;
@@ -215,6 +236,8 @@ header{
   height:100%;
 
   object-fit:contain;
+
+  display:block;
 }
 
 .like-badge{
@@ -223,20 +246,26 @@ header{
   top:15px;
   left:15px;
 
-  background:#ffffff;
+  z-index:2;
+
+  background:#fff;
 
   padding:8px 13px;
 
   border-radius:20px;
 
   font-size:13px;
-
   font-weight:600;
 
   box-shadow:
     0 5px 20px
     rgba(0,0,0,.10);
 }
+
+
+/* =====================================================
+   FEATURED INFO
+===================================================== */
 
 .featured-info{
   text-align:center;
@@ -246,7 +275,6 @@ header{
 
 .featured-info h2{
   font-size:21px;
-
   line-height:1.35;
 
   margin-bottom:8px;
@@ -254,17 +282,19 @@ header{
 
 .featured-price{
   font-size:20px;
-
   font-weight:700;
 
   margin-bottom:18px;
 }
 
-/* =========================
-   LIKE BUTTONS
-========================= */
+
+/* =====================================================
+   CHOICE BUTTONS
+===================================================== */
 
 .choice-buttons{
+  width:100%;
+
   display:flex;
 
   gap:10px;
@@ -273,18 +303,19 @@ header{
 .choice-buttons button{
   flex:1;
 
+  min-width:0;
+
   height:48px;
 
   border-radius:25px;
 
-  border:1px solid #dddddd;
+  border:1px solid #ddd;
 
-  background:#ffffff;
+  background:#fff;
 
-  color:#111111;
+  color:#111;
 
   font-size:14px;
-
   font-weight:600;
 
   cursor:pointer;
@@ -297,27 +328,25 @@ header{
 }
 
 .yes-button{
-  background:#111111 !important;
-
-  color:#ffffff !important;
-
-  border-color:#111111 !important;
+  background:#111 !important;
+  color:#fff !important;
+  border-color:#111 !important;
 }
 
-/* =========================
+
+/* =====================================================
    VIEW PRODUCT
-========================= */
+===================================================== */
 
 .view-product{
   display:block;
 
-  margin-top:10px;
-
   width:100%;
-
   height:48px;
 
   line-height:48px;
+
+  margin-top:10px;
 
   text-align:center;
 
@@ -325,12 +354,11 @@ header{
 
   border-radius:25px;
 
-  background:#111111;
+  background:#111;
 
-  color:#ffffff;
+  color:#fff;
 
   font-size:14px;
-
   font-weight:600;
 
   transition:.2s;
@@ -340,30 +368,34 @@ header{
   opacity:.85;
 }
 
-/* =========================
+
+/* =====================================================
    AI MESSAGE
-========================= */
+===================================================== */
 
 .ai-message{
+  min-height:24px;
+
   text-align:center;
 
-  margin-top:25px;
+  margin-top:20px;
 
-  min-height:25px;
-
-  color:#666666;
+  color:#666;
 
   font-size:14px;
 }
 
-/* =========================
-   RECOMMENDATION
-========================= */
+
+/* =====================================================
+   RECOMMENDATIONS
+===================================================== */
 
 .recommendation{
   display:none;
 
-  margin-top:70px;
+  width:100%;
+
+  margin-top:65px;
 }
 
 .recommendation-title{
@@ -379,21 +411,24 @@ header{
 
   grid-template-columns:
     repeat(
-      auto-fit,
-      minmax(210px,1fr)
+      4,
+      minmax(0,1fr)
     );
 
-  gap:20px;
+  gap:18px;
 }
 
-/* =========================
+
+/* =====================================================
    PRODUCT CARD
-========================= */
+===================================================== */
 
 .product-card{
-  background:#ffffff;
+  min-width:0;
 
-  border:1px solid #eeeeee;
+  background:#fff;
+
+  border:1px solid #eee;
 
   border-radius:18px;
 
@@ -412,12 +447,11 @@ header{
 
 .product-image{
   width:100%;
-
-  height:230px;
-
-  border-radius:14px;
+  height:220px;
 
   background:#fafafa;
+
+  border-radius:14px;
 
   overflow:hidden;
 }
@@ -427,6 +461,8 @@ header{
   height:100%;
 
   object-fit:contain;
+
+  display:block;
 }
 
 .product-info{
@@ -434,7 +470,7 @@ header{
 }
 
 .product-info h3{
-  font-size:16px;
+  font-size:15px;
 
   line-height:1.35;
 
@@ -443,12 +479,13 @@ header{
 
 .product-price{
   font-size:16px;
-
   font-weight:700;
 }
 
 .card-button{
   display:block;
+
+  width:100%;
 
   text-align:center;
 
@@ -458,22 +495,69 @@ header{
 
   border-radius:22px;
 
-  background:#111111;
+  background:#111;
 
-  color:#ffffff;
+  color:#fff;
 
   text-decoration:none;
 
   font-size:13px;
-
   font-weight:600;
 }
 
-/* =========================
+
+/* =====================================================
+   TRUST SECTION
+===================================================== */
+
+.trust-section{
+  width:100%;
+
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+
+  padding:45px 20px;
+
+  margin-bottom:70px;
+}
+
+.trust-grid{
+  width:100%;
+  max-width:1000px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:30px;
+
+  text-align:center;
+}
+
+.trust-item strong{
+  display:block;
+
+  font-size:15px;
+
+  margin-bottom:6px;
+}
+
+.trust-item span{
+  color:#777;
+
+  font-size:13px;
+}
+
+
+/* =====================================================
    ALL PRODUCTS
-========================= */
+===================================================== */
 
 .all-products{
+  width:100%;
   max-width:1200px;
 
   margin:0 auto;
@@ -493,161 +577,428 @@ header{
   display:grid;
 
   grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(220px,1fr)
-    );
+    repeat(4,minmax(0,1fr));
 
   gap:20px;
 }
 
-/* =========================
-   TRUST
-========================= */
 
-.trust-section{
-  border-top:1px solid #eeeeee;
+/* =====================================================
+   EMPTY / LOADING
+===================================================== */
 
-  border-bottom:1px solid #eeeeee;
-
-  padding:45px 20px;
-
-  margin-bottom:70px;
-}
-
-.trust-grid{
-  max-width:1000px;
-
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
-
-  gap:30px;
+.message{
+  width:100%;
 
   text-align:center;
+
+  color:#777;
+
+  padding:50px 20px;
 }
 
-.trust-item strong{
-  display:block;
 
-  font-size:15px;
-
-  margin-bottom:6px;
-}
-
-.trust-item span{
-  color:#777777;
-
-  font-size:13px;
-}
-
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
-  border-top:1px solid #eeeeee;
+  width:100%;
+
+  border-top:1px solid #eee;
 
   padding:30px 20px;
 
   text-align:center;
 
-  color:#777777;
+  color:#777;
 
   font-size:13px;
 }
 
 footer strong{
-  color:#111111;
+  color:#111;
 }
 
-/* =========================
-   EMPTY / LOADING
-========================= */
 
-.message{
-  text-align:center;
+/* =====================================================
+   TABLET
+===================================================== */
 
-  color:#777777;
-
-  padding:50px 20px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
+@media(max-width:1000px){
 
   header{
-    padding:0 18px;
-  }
-
-  .logo{
-    font-size:17px;
+    padding:0 25px;
   }
 
   .hero{
-    padding-top:40px;
+    padding-top:45px;
   }
 
   .hero h1{
-    font-size:31px;
+    font-size:36px;
+  }
+
+  .recommendation-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .all-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+  header{
+    height:62px;
+
+    padding:0 14px;
+  }
+
+  .logo{
+    font-size:16px;
+    letter-spacing:1px;
+  }
+
+  .currency{
+    max-width:105px;
+
+    padding:8px 8px;
+
+    font-size:11px;
+  }
+
+
+  /* HERO */
+
+  .hero{
+    padding:32px 15px 18px;
+  }
+
+  .hero h1{
+    font-size:28px;
+    line-height:1.2;
+
+    margin-bottom:9px;
   }
 
   .hero p{
+    font-size:13px;
+  }
+
+
+  /* SEARCH */
+
+  .search-box{
+    width:100%;
+
+    padding:0 15px;
+
+    margin:12px auto 18px;
+  }
+
+  .search-box input{
+    height:46px;
+
     font-size:14px;
+  }
+
+
+  /* AI */
+
+  .ai-section{
+    width:100%;
+
+    padding:0 14px;
+
+    margin-bottom:55px;
   }
 
   .ai-heading{
     font-size:24px;
+
+    margin-bottom:18px;
+  }
+
+
+  /* FEATURED */
+
+  .featured-product{
+    width:100%;
+
+    max-width:none;
+
+    padding:10px;
+
+    border-radius:20px;
   }
 
   .featured-image{
-    height:340px;
+    width:100%;
+
+    height:330px;
+
+    border-radius:15px;
+  }
+
+  .featured-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+  }
+
+  .like-badge{
+    top:10px;
+    left:10px;
+
+    padding:7px 11px;
+
+    font-size:12px;
+  }
+
+
+  /* FEATURED TEXT */
+
+  .featured-info{
+    padding:15px 5px 5px;
+  }
+
+  .featured-info h2{
+    font-size:18px;
+
+    line-height:1.35;
+  }
+
+  .featured-price{
+    font-size:18px;
+
+    margin-bottom:14px;
+  }
+
+
+  /* BUTTONS */
+
+  .choice-buttons{
+    width:100%;
+
+    gap:8px;
+  }
+
+  .choice-buttons button{
+    min-height:50px;
+    height:50px;
+
+    font-size:13px;
+  }
+
+  .view-product{
+    min-height:50px;
+    height:50px;
+
+    line-height:50px;
+
+    font-size:13px;
+  }
+
+
+  /* AI MESSAGE */
+
+  .ai-message{
+    font-size:13px;
+
+    margin-top:18px;
+  }
+
+
+  /* RECOMMENDATIONS */
+
+  .recommendation{
+    margin-top:45px;
+  }
+
+  .recommendation-title{
+    font-size:22px;
+
+    margin-bottom:18px;
+  }
+
+  .recommendation-grid{
+    grid-template-columns:1fr;
+
+    gap:14px;
+  }
+
+
+  /* PRODUCT CARD */
+
+  .product-card{
+    width:100%;
+
+    padding:10px;
+
+    border-radius:16px;
+  }
+
+  .product-image{
+    width:100%;
+
+    height:270px;
+
+    border-radius:12px;
+  }
+
+  .product-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+  }
+
+  .product-info{
+    padding:11px 3px 3px;
+  }
+
+  .product-info h3{
+    font-size:15px;
+  }
+
+  .product-price{
+    font-size:15px;
+  }
+
+  .card-button{
+    min-height:46px;
+
+    padding:12px;
+
+    font-size:13px;
+  }
+
+
+  /* TRUST */
+
+  .trust-section{
+    padding:35px 15px;
+
+    margin-bottom:45px;
   }
 
   .trust-grid{
     grid-template-columns:1fr;
 
-    gap:22px;
+    gap:20px;
   }
 
-  .recommendation-title,
+  .trust-item strong{
+    font-size:14px;
+  }
+
+  .trust-item span{
+    font-size:12px;
+  }
+
+
+  /* ALL PRODUCTS */
+
+  .all-products{
+    padding:0 14px 55px;
+  }
+
   .section-title{
-    font-size:23px;
+    font-size:22px;
+
+    margin-bottom:18px;
   }
 
-}
+  .all-grid{
+    grid-template-columns:1fr;
 
-/* =========================
-   VERY SMALL MOBILE
-========================= */
+    gap:14px;
+  }
 
-@media(max-width:400px){
 
-  .currency{
-    padding:8px 9px;
+  /* FOOTER */
+
+  footer{
+    padding:25px 15px;
 
     font-size:12px;
   }
 
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media(max-width:380px){
+
   .logo{
-    font-size:15px;
+    font-size:14px;
+  }
+
+  .currency{
+    max-width:95px;
+
+    font-size:10px;
   }
 
   .hero h1{
-    font-size:27px;
+    font-size:25px;
   }
 
   .featured-image{
-    height:300px;
+    height:290px;
+  }
+
+  .featured-info h2{
+    font-size:17px;
+  }
+
+  .choice-buttons button{
+    font-size:12px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media(max-width:330px){
+
+  header{
+    padding:0 10px;
+  }
+
+  .logo{
+    font-size:13px;
+  }
+
+  .currency{
+    max-width:88px;
+
+    padding:7px 5px;
+  }
+
+  .hero h1{
+    font-size:23px;
+  }
+
+  .featured-image{
+    height:260px;
   }
 
 }
@@ -659,9 +1010,9 @@ footer strong{
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================= -->
+===================================================== -->
 
 <header>
 
@@ -707,9 +1058,9 @@ footer strong{
 </header>
 
 
-<!-- =========================
+<!-- =====================================================
      HERO
-========================= -->
+===================================================== -->
 
 <section class="hero">
 
@@ -724,9 +1075,9 @@ footer strong{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      SEARCH
-========================= -->
+===================================================== -->
 
 <div class="search-box">
 
@@ -734,14 +1085,15 @@ footer strong{
     id="search"
     type="search"
     placeholder="Search products..."
+    autocomplete="off"
   >
 
 </div>
 
 
-<!-- =========================
-     AI PRODUCT SECTION
-========================= -->
+<!-- =====================================================
+     AI / FEATURED PRODUCT
+===================================================== -->
 
 <section class="ai-section">
 
@@ -749,8 +1101,6 @@ footer strong{
     ❤️ Like this?
   </div>
 
-
-  <!-- FEATURED PRODUCT -->
 
   <div id="featuredProduct">
 
@@ -761,15 +1111,15 @@ footer strong{
   </div>
 
 
-  <!-- AI MESSAGE -->
-
   <div
     id="aiMessage"
     class="ai-message"
   ></div>
 
 
-  <!-- RECOMMENDATIONS -->
+  <!-- ===================================================
+       RECOMMENDATIONS
+  ==================================================== -->
 
   <div
     id="recommendation"
@@ -790,9 +1140,9 @@ footer strong{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      TRUST
-========================= -->
+===================================================== -->
 
 <section class="trust-section">
 
@@ -841,9 +1191,9 @@ footer strong{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      ALL PRODUCTS
-========================= -->
+===================================================== -->
 
 <section class="all-products">
 
@@ -859,9 +1209,9 @@ footer strong{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      FOOTER
-========================= -->
+===================================================== -->
 
 <footer>
 
@@ -878,18 +1228,18 @@ footer strong{
 
 <script>
 
-/* ========================================
+/* =====================================================
    PRODUCT DATA
-======================================== */
+===================================================== */
 
 let products = [];
 
 let currentProductIndex = 0;
 
 
-/* ========================================
+/* =====================================================
    CURRENCY
-======================================== */
+===================================================== */
 
 let selectedCurrency =
   localStorage.getItem(
@@ -908,14 +1258,9 @@ currencySelect.value =
 
 
 /*
-  These are approximate conversion rates.
+  Approximate conversion rates.
 
-  USD = 1
-  INR = 89
-  GBP = 0.75
-  EUR = 0.86
-  CAD = 1.38
-  AUD = 1.53
+  These are NOT live exchange rates.
 */
 
 const rates = {
@@ -952,9 +1297,9 @@ const symbols = {
 };
 
 
-/* ========================================
+/* =====================================================
    CHANGE CURRENCY
-======================================== */
+===================================================== */
 
 currencySelect.addEventListener(
   "change",
@@ -972,12 +1317,14 @@ currencySelect.addEventListener(
 
     showAllProducts();
 
+    const recommendation =
+      document.getElementById(
+        "recommendation"
+      );
+
     if(
-      document
-        .getElementById(
-          "recommendation"
-        )
-        .style.display === "block"
+      recommendation.style.display ===
+      "block"
     ){
 
       showRecommendations();
@@ -988,11 +1335,13 @@ currencySelect.addEventListener(
 );
 
 
-/* ========================================
+/* =====================================================
    ESCAPE HTML
-======================================== */
+===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
   return String(
     value || ""
@@ -1021,9 +1370,9 @@ function escapeHTML(value){
 }
 
 
-/* ========================================
+/* =====================================================
    GET PRICE
-======================================== */
+===================================================== */
 
 function getPrice(
   product
@@ -1104,26 +1453,45 @@ function getPrice(
 }
 
 
-/* ========================================
-   GET ACTIVE PRODUCTS
-======================================== */
+/* =====================================================
+   ACTIVE PRODUCTS
+===================================================== */
 
 function getActiveProducts(){
 
   return products.filter(
     product =>
+
       product &&
+
       product.active !== false &&
+
       product.image &&
+
       product.link
+
   );
 
 }
 
 
-/* ========================================
-   SHOW FEATURED PRODUCT
-======================================== */
+/* =====================================================
+   IMAGE ERROR
+===================================================== */
+
+function imageError(
+  image
+){
+
+  image.style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   FEATURED PRODUCT
+===================================================== */
 
 function showFeaturedProduct(){
 
@@ -1184,6 +1552,7 @@ function showFeaturedProduct(){
         <img
           src="${escapeHTML(product.image)}"
           alt="${escapeHTML(product.title)}"
+          loading="eager"
           onerror="imageError(this)"
         >
 
@@ -1213,6 +1582,7 @@ function showFeaturedProduct(){
         <div class="choice-buttons">
 
           <button
+            type="button"
             class="yes-button"
             onclick="likeProduct()"
           >
@@ -1221,6 +1591,7 @@ function showFeaturedProduct(){
 
 
           <button
+            type="button"
             onclick="skipProduct()"
           >
             Not for me
@@ -1247,23 +1618,9 @@ function showFeaturedProduct(){
 }
 
 
-/* ========================================
-   IMAGE ERROR
-======================================== */
-
-function imageError(
-  image
-){
-
-  image.style.display =
-    "none";
-
-}
-
-
-/* ========================================
+/* =====================================================
    LIKE PRODUCT
-======================================== */
+===================================================== */
 
 function likeProduct(){
 
@@ -1273,15 +1630,24 @@ function likeProduct(){
     ];
 
 
+  if(!product){
+    return;
+  }
+
+
   localStorage.setItem(
     "likedProduct",
     product.title
   );
 
 
-  document.getElementById(
-    "aiMessage"
-  ).innerHTML =
+  const message =
+    document.getElementById(
+      "aiMessage"
+    );
+
+
+  message.innerHTML =
     "Finding something you may like ❤️";
 
 
@@ -1291,15 +1657,15 @@ function likeProduct(){
       showRecommendations();
 
     },
-    400
+    350
   );
 
 }
 
 
-/* ========================================
+/* =====================================================
    SKIP PRODUCT
-======================================== */
+===================================================== */
 
 function skipProduct(){
 
@@ -1317,8 +1683,7 @@ function skipProduct(){
 
   document.getElementById(
     "aiMessage"
-  ).innerHTML =
-    "";
+  ).innerHTML = "";
 
 
   document.getElementById(
@@ -1332,9 +1697,9 @@ function skipProduct(){
 }
 
 
-/* ========================================
-   SHOW RECOMMENDATIONS
-======================================== */
+/* =====================================================
+   RECOMMENDATIONS
+===================================================== */
 
 function showRecommendations(){
 
@@ -1357,11 +1722,18 @@ function showRecommendations(){
           product,
           index
         ) =>
+
+          product &&
+
           product.active !== false &&
+
           index !==
           currentProductIndex &&
+
           product.image &&
+
           product.link
+
       )
       .slice(
         0,
@@ -1398,6 +1770,7 @@ function showRecommendations(){
                 <img
                   src="${escapeHTML(product.image)}"
                   alt="${escapeHTML(product.title)}"
+                  loading="lazy"
                   onerror="imageError(this)"
                 >
 
@@ -1448,17 +1821,24 @@ function showRecommendations(){
     "block";
 
 
-  recommendation.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+  setTimeout(
+    function(){
+
+      recommendation.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    },
+    50
+  );
 
 }
 
 
-/* ========================================
+/* =====================================================
    SHOW ALL PRODUCTS
-======================================== */
+===================================================== */
 
 function showAllProducts(
   searchTerm = ""
@@ -1474,6 +1854,14 @@ function showAllProducts(
     getActiveProducts();
 
 
+  const search =
+    String(
+      searchTerm || ""
+    )
+    .toLowerCase()
+    .trim();
+
+
   const filtered =
     activeProducts.filter(
       product => {
@@ -1481,25 +1869,29 @@ function showAllProducts(
         const title =
           String(
             product.title || ""
-          ).toLowerCase();
+          )
+          .toLowerCase();
 
 
         const description =
           String(
             product.description || ""
-          ).toLowerCase();
-
-
-        const search =
-          searchTerm
-            .toLowerCase()
-            .trim();
+          )
+          .toLowerCase();
 
 
         return (
+
           !search ||
-          title.includes(search) ||
-          description.includes(search)
+
+          title.includes(
+            search
+          ) ||
+
+          description.includes(
+            search
+          )
+
         );
 
       }
@@ -1542,6 +1934,7 @@ function showAllProducts(
                 <img
                   src="${escapeHTML(product.image)}"
                   alt="${escapeHTML(product.title)}"
+                  loading="lazy"
                   onerror="imageError(this)"
                 >
 
@@ -1590,9 +1983,9 @@ function showAllProducts(
 }
 
 
-/* ========================================
+/* =====================================================
    SEARCH
-======================================== */
+===================================================== */
 
 document
   .getElementById(
@@ -1610,9 +2003,9 @@ document
   );
 
 
-/* ========================================
+/* =====================================================
    LOAD PRODUCTS
-======================================== */
+===================================================== */
 
 async function loadProducts(){
 
@@ -1645,7 +2038,7 @@ async function loadProducts(){
     ){
 
       throw new Error(
-        "products.json is not an array."
+        "products.json must contain an array."
       );
 
     }
@@ -1654,10 +2047,15 @@ async function loadProducts(){
     products =
       data.filter(
         product =>
+
           product &&
+
           product.active !== false &&
+
           product.image &&
+
           product.link
+
       );
 
 
@@ -1673,6 +2071,10 @@ async function loadProducts(){
           Products coming soon.
         </div>
         `;
+
+      document.getElementById(
+        "allProducts"
+      ).innerHTML = "";
 
       return;
 
@@ -1690,6 +2092,7 @@ async function loadProducts(){
   }catch(error){
 
     console.error(
+      "PRODUCT LOAD ERROR:",
       error
     );
 
@@ -1708,9 +2111,9 @@ async function loadProducts(){
 }
 
 
-/* ========================================
-   START
-======================================== */
+/* =====================================================
+   START WEBSITE
+===================================================== */
 
 loadProducts();
 
